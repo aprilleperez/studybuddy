@@ -22,3 +22,25 @@ module.exports = function(app) {
     });
   });
 };
+
+// ---------------API ROUTES-------------------
+//  modal 1 user information on click is sent to DB Table 1: User Info (create account)
+
+
+// modal 2 user survey results on click are sent to Table 2: User Search in DB (new or additional) (survey)
+
+
+// get matches for user for user search (match results) page
+
+
+// user clicks to favorite a profile and this information is sent to Table 3: Favorites in DB (favorites)
+
+
+// user clicks on favorites and is presented with a list of all of the people they have marked as favorites
+
+
+// log in/log out route(s) ?????
+
+
+
+*/
