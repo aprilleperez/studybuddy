@@ -1,6 +1,6 @@
 {{!-- NAVBAR --}}
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Study Buddy</a>
+  <a class="navbar-brand" href="/">Study Buddy</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
     aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -8,12 +8,12 @@
   <div class="collapse navbar-collapse" id="navbarText">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="#">About <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="#about">About <span class="sr-only">(current)</span></a>
       </li>
       {{#unless authenticated}}
       {{!-- ^^ not authenticated (falsey value) --}}
       <li class="nav-item">
-        <a class="nav-link" href="#">Login</a>
+        <a class="nav-link" href="#login-modal" data-toggle="modal" data-target="#login-modal">Login</a>
       </li>
       {{/unless}}
       {{#if authenticated}}
@@ -40,8 +40,16 @@
     <br>
   </div>
 
-  <p class="loginMsg"><small> or <a href="#">login</a> if you have an account.</small></p>
+  <p class="loginMsg"><small> or <a href="#login-modal" data-toggle="modal" data-target="#login-modal">login</a> if you have an account.</small></p>
 </div>
+
+
+<div class="aboutSection" id="about">
+  
+  <h1>This is the about section</h1>
+
+</div>
+
 
 
 {{!-- MODAL 1: CREATE ACCOUNT --}}
@@ -118,6 +126,36 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary create-button" data-toggle="modal" data-target="#modal2">Create</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{{!-- LOGIN MODAL --}}
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Username</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Password</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary create-button" data-toggle="modal">Create</button>
       </div>
     </div>
   </div>

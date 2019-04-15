@@ -12,6 +12,7 @@ body {
   background-color: yellow;
 }
 
+/* LANDING PAGE */
 .landingJumbo {
   /* background-color: burlywood; */
   background: rgb(43,12,255);
@@ -41,4 +42,40 @@ body {
   /* background-color: aqua; */
   display: flex;
   justify-content: center;
+}
+
+.aboutSection {
+  background-color: dodgerblue;
+  height: 100vh;
+}
+
+
+/* MATCH PAGE */
+.matchContainer {
+  background-color: darkorange;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.topMatches, .moreMatches {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.matchCard {
+  margin: 10px;
+}
+
+
+/* BUDDYLIST PAGE */
+.favesContainer {
+  background-color: indianred;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
