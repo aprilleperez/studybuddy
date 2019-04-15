@@ -1,0 +1,38 @@
+{{!-- NAVBAR --}}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Study Buddy</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+    aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#">About <span class="sr-only">(current)</span></a>
+      </li>
+      {{#unless authenticated}}
+      <li class="nav-item">
+        <a class="nav-link" href="#">Login</a>
+      </li>
+      {{/unless}}
+      {{#if authenticated}}
+      <li class="nav-item">
+        <a class="nav-link" href="#">Account</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="#">Buddy List</a>
+      </li>
+      {{/if}}
+    </ul>
+  </div>
+</nav>
+
+
+<div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    {{!-- <a href="#" class="btn btn-primary">Go somewhere</a> --}}
+  </div>
+</div>

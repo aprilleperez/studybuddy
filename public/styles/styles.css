@@ -1,3 +1,44 @@
+body {
+  font-family: 'Nunito', sans-serif;
+  /* background: rgb(43,12,255);
+  background: linear-gradient(345deg, rgba(43,12,255,1) 0%, rgba(0,255,234,1) 85%); */
+}
+
 .list-group-item {
   line-height: 2.5;
+}
+
+.container {
+  background-color: yellow;
+}
+
+.landingJumbo {
+  /* background-color: burlywood; */
+  background: rgb(43,12,255);
+  background: linear-gradient(345deg, rgba(43,12,255,1) 0%, rgba(0,255,234,1) 85%);
+  height: 100vh;
+  border-radius: unset;
+  padding-top: 200px;
+}
+
+.landingCTA {
+  margin-top: 100px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.signup-button {
+  margin-left: 20px;
+  margin-right: 20px;
+  width: 250px;
+  color: white;
+  border-radius: 0px;
+  border-color: white;
+}
+
+.loginMsg {
+  /* background-color: aqua; */
+  display: flex;
+  justify-content: center;
 }
