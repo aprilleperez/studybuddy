@@ -1,15 +1,17 @@
 $(document).ready(function() {
   // Getting references to our form and input
   var signUpForm = $("form.signup");
-  var emailInputSingup = $("form.signup > input#email-input");
-  var passwordInput = $("form.signup > input#password-input");
+  var emailInputSingup = $("#email-input-s");
+  var passwordInputSingup = $("#password-input-s");
+
+  //TODO: The below code can be refactored into a single helper method for both signup and login
 
   // When the signup button is clicked, we validate the email and password are not blank
   signUpForm.on("submit", function(event) {
     event.preventDefault();
     var userData = {
       email: emailInputSingup.val().trim(),
-      password: passwordInput.val().trim()
+      password: passwordInputSingup.val().trim()
     };
 
     if (!userData.email || !userData.password) {
@@ -18,7 +20,7 @@ $(document).ready(function() {
     // If we have an email and password, run the signUpUser function
     signUpUser(userData.email, userData.password);
     emailInputSingup.val("");
-    passwordInput.val("");
+    passwordInputSingup.val("");
   });
 
   // Does a post to the signup route. If successful, we are redirected to the members page
@@ -41,15 +43,15 @@ $(document).ready(function() {
 
   // Getting references to our form and inputs
   var loginForm = $("form.login");
-  var emailInputLogin = $("form.login > input#email-input");
-  var passwordInput = $("form.login > input#password-input");
+  var emailInputLogin = $("#email-input-l");
+  var passwordInputLogin = $("#password-input-l");
 
   // When the form is submitted, we validate there's an email and password entered
   loginForm.on("submit", function(event) {
     event.preventDefault();
     var userData = {
       email: emailInputLogin.val().trim(),
-      password: passwordInput.val().trim()
+      password: passwordInputLogin.val().trim()
     };
 
     if (!userData.email || !userData.password) {
@@ -59,7 +61,7 @@ $(document).ready(function() {
     // If we have an email and password we run the loginUser function and clear the form
     loginUser(userData.email, userData.password);
     emailInputLogin.val("");
-    passwordInput.val("");
+    passwordInputLogin.val("");
   });
 
   // loginUser does a post to our "api/login" route and if successful, redirects us the the members page
