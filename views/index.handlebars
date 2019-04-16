@@ -8,7 +8,7 @@
   <div class="collapse navbar-collapse" id="navbarText">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="#about">About <span class="sr-only">(current)</span></a>
+        <a class="nav-link" id="about-link" href="#about">About <span class="sr-only">(current)</span></a>
       </li>
       {{#unless authenticated}}
       {{!-- ^^ not authenticated (falsey value) --}}
@@ -66,26 +66,22 @@
       <div class="modal-body">
         <form>
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Username</label>
-            <input type="text" class="form-control" id="recipient-name">
+            <label for="createUsername" class="col-form-label">Username</label>
+            <input type="text" class="form-control" id="createUsername">
           </div>
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Password</label>
-            <input type="text" class="form-control" id="recipient-name">
+            <label for="createPassword" class="col-form-label">Password</label>
+            <input type="password" class="form-control" id="createPassword">
           </div>
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Email</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-          <div class="form-group">
-            <label for="message-text" class="col-form-label">Message:</label>
-            <textarea class="form-control" id="message-text"></textarea>
+            <label for="createEmail" class="col-form-label">Email</label>
+            <input type="email" class="form-control" id="createEmail">
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary create-button" data-toggle="modal" data-target="#modal2">Create</button>
+        <button type="button" class="btn btn-primary create-button" id="createAccount-button" data-toggle="modal" data-target="#modal2" data-dismiss="modal">Create</button>
       </div>
     </div>
   </div>
@@ -125,7 +121,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary create-button" data-toggle="modal" data-target="#modal2">Create</button>
+        <button type="button" class="btn btn-primary create-button" id="survey-button" data-toggle="modal" data-target="#modal2">Submit</button>
       </div>
     </div>
   </div>
@@ -146,16 +142,16 @@
       <div class="modal-body">
         <form>
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Username</label>
-            <input type="text" class="form-control" id="recipient-name">
+            <label for="username" class="col-form-label">Username</label>
+            <input type="text" class="form-control" id="username">
           </div>
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Password</label>
-            <input type="text" class="form-control" id="recipient-name">
+            <label for="password" class="col-form-label">Password</label>
+            <input type="password" class="form-control" id="password">
           </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary create-button" data-toggle="modal">Create</button>
+        <button type="button" class="btn btn-primary create-button" id="login-button" data-toggle="modal">Login</button>
       </div>
     </div>
   </div>
@@ -166,8 +162,8 @@
 
 
 {{!-- JS SCRIPTS --}}
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/index.js"></script>
+{{!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> --}}
+{{!-- <script src="/js/index.js"></script> --}}
 
 
 

@@ -14,9 +14,9 @@ body {
 
 /* LANDING PAGE */
 .landingJumbo {
-  /* background-color: burlywood; */
-  background: rgb(43,12,255);
-  background: linear-gradient(345deg, rgba(43,12,255,1) 0%, rgba(0,255,234,1) 85%);
+  background-color: burlywood;
+  /* background: rgb(43,12,255);
+  background: linear-gradient(345deg, rgba(43,12,255,1) 0%, rgba(0,255,234,1) 85%); */
   height: 100vh;
   border-radius: unset;
   padding-top: 200px;
@@ -68,6 +68,15 @@ body {
 
 .matchCard {
   margin: 10px;
+}
+
+#favorite {
+  color: blue;
+  /* float: right; */
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  /* font-size: 15px; */
 }
 
 

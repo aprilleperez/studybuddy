@@ -14,7 +14,8 @@ module.exports = function(app) {
 
   app.get("/user/matches", function(req, res) {
       res.render("matchpage", {
-        authenticated: true
+        authenticated: true,
+        // favorited: true
       });
   });
 
