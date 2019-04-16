@@ -7,10 +7,10 @@ var db = require("../models");
 module.exports = function(app) {
   // root route: landing page. TODO: Hook in user authentication
   app.get("/", function(req, res) {
-    if (!req.user) {
-      res.redirect("/login");
-      return;
-    }
+    // if (!req.user) {
+    //   res.redirect("/");
+    //   return;
+    
 
     res.render("index", {
     authenticated: true // FOR TESTING 
