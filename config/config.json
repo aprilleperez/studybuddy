@@ -1,13 +1,8 @@
 {
   "development": {
     "username": "root",
-<<<<<<< HEAD
     "password": null,
     "database": "studybuddy",
-=======
-    "password": "password",
-    "database": "exampledb",
->>>>>>> 4aa2c5fe55ab3943563c33ac62d27a24d0efe457
     "host": "localhost",
     "dialect": "mysql"
   },
