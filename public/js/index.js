@@ -35,6 +35,9 @@ $("#login-button").click(function (event) {
 
 // when user CLICKS CREATE ACCOUNT button
 $("#createAccount-button").click(function (event) {
+  // event.preventDefault();
+  $('#modal2').modal({ backdrop: 'static', keyboard: false })
+  $('#modal1').modal('hide');
   createAccount();
   $("#createUsername").val("");
   $("#createPassword").val("");
@@ -53,21 +56,149 @@ $("#favorite").click(function (event) {
 
 
 
-// $(".country").on("click", function () {  // on click of gif image, make state switch
 
-//   var state = $(this).attr("data-state"); // var storing image's current state
-
-//   if (state === "still") { // if current state is set to still
-//       var animate = $(this).attr("data-animate"); // var storing image's data-animate URL
-//       $(this).attr("src", animate); // change image's src attr to its animate attr
-//       $(this).attr("data-state", "animate"); // change image's current state to animate
-
-//   } else { // else if current state is set to animate
-//       var still = $(this).attr("data-still"); // var storing image's data-still URL
-//       $(this).attr("src", still); // change image's src attr to its still attr
-//       $(this).attr("data-state", "still"); // change image's current state to still
-//   }
+// $(".createAccount-button").on("click", function () {
+//   event.preventDefault();
+//   $('#modal2').modal({ backdrop: 'static', keyboard: false })
+//   $('#modal1').modal('hide');
 // });
+
+
+$(".signup-button").on("click", function () {
+  // grabs users input and prevents clicking outside modal
+  event.preventDefault();
+  $('#modal1').modal({ backdrop: 'static', keyboard: false })
+  // grabs user input
+
+});
+
+
+
+$("#submitButton").on("click", function () {
+  // grabs user input, prevents being able to click outside of modal, and hides modal one
+  event.preventDefault();
+  $('#modal2').modal({ backdrop: 'static', keyboard: false })
+  $('#modal1').modal('hide');
+  // grabs user input and converts to corrosponding variable
+  var topicQuestion1 = $("#topicQuestion").val();
+  var subQuestion1 = $("#subQuestion").val();
+  var remoteQuestion1 = $("#remoteQuestion").val();
+  var inPerson1 = $("#inPerson").val();
+  var zipCode1 = $("#zipCode").val();
+  var timeQuestion1 = $("#timeQuestion").val();
+  var daysOfWeek1 = [];
+  // cycles through each check box and grabs the value if checked
+  $.each($("input[name='daysOfWeek']:checked"), function () {
+    daysOfWeek1.push($(this).val());
+  });
+  var usernameInput1 = $("#recipient-name").val();
+  var passwordInput1 = $("#userPassword").val();
+  var emailInput1 = $("#userEmail").val();
+  var profilePictureInput1 = $("#userPictureInput").val();
+
+  console.log(topicQuestion1)
+  console.log(subQuestion1)
+  console.log(remoteQuestion1)
+  console.log(inPerson1)
+  console.log(zipCode1)
+  console.log(timeQuestion1)
+  console.log(daysOfWeek1)
+  console.log(usernameInput1)
+  console.log(passwordInput1)
+  console.log(emailInput1)
+  console.log(profilePictureInput1)
+
+});
+
+$(document).ready(function () {
+  $("#topicQuestion").change(function () {
+
+    if ($(this)[0].value === "Math") {
+      $("#subQuestion").empty();
+      $("#subQuestion").append("   <option>Algebra</option>")
+      $("#subQuestion").append("   <option>Calculus</option>")
+      $("#subQuestion").append("   <option>Geometry</option>")
+      $("#subQuestion").append("   <option>Number Theory</option>")
+      $("#subQuestion").append("   <option>Differential Equations</option>")
+    } else if ($(this)[0].value === "Science") {
+      $("#subQuestion").empty();
+      $("#subQuestion").append("   <option>Physics</option>")
+      $("#subQuestion").append("   <option>Biology</option>")
+      $("#subQuestion").append("   <option>Chemistry</option>")
+      $("#subQuestion").append("   <option>Astronomy</option>")
+      $("#subQuestion").append("   <option>Geology</option>")
+      $("#subQuestion").append("   <option>Botany</option>")
+    } else if ($(this)[0].value === "Law") {
+      $("#subQuestion").empty();
+      $("#subQuestion").append("   <option>Torts</option>")
+      $("#subQuestion").append("   <option>Criminal Law</option>")
+      $("#subQuestion").append("   <option>Constitutional Law</option>")
+      $("#subQuestion").append("   <option>Real Property</option>")
+      $("#subQuestion").append("   <option>Contracts</option>")
+      $("#subQuestion").append("   <option>Wills and Trusts</option>")
+      $("#subQuestion").append("   <option>Choice of Law</option>")
+    } else if ($(this)[0].value === "Coding") {
+      $("#subQuestion").empty();
+      $("#subQuestion").append("   <option>Java</option>")
+      $("#subQuestion").append("   <option>Javascript</option>")
+      $("#subQuestion").append("   <option>C++</option>")
+      $("#subQuestion").append("   <option>Ruby</option>")
+      $("#subQuestion").append("   <option>Python</option>")
+      $("#subQuestion").append("   <option>C Sharp</option>")
+      $("#subQuestion").append("   <option>SQL</option>")
+      $("#subQuestion").append("   <option>Perl</option>")
+    } else if ($(this)[0].value === "English") {
+      $("#subQuestion").empty();
+      $("#subQuestion").append("   <option>Writing</option>")
+      $("#subQuestion").append("   <option>Classics</option>")
+      $("#subQuestion").append("   <option>Fantasy</option>")
+      $("#subQuestion").append("   <option>Historical Fiction</option>")
+      $("#subQuestion").append("   <option>Differential Equations</option>")
+    } else if ($(this)[0].value === "Exercise Sciences") {
+      $("#subQuestion").empty();
+      $("#subQuestion").append("   <option>Kinesiology</option>")
+      $("#subQuestion").append("   <option>Fitness Training</option>")
+      $("#subQuestion").append("   <option>Coaching</option>")
+      $("#subQuestion").append("   <option>Physical Therapy</option>")
+      $("#subQuestion").append("   <option>Research</option>")
+    } else if ($(this)[0].value === "Engineering") {
+      $("#subQuestion").empty();
+      $("#subQuestion").append("   <option>Mechanical</option>")
+      $("#subQuestion").append("   <option>Electrical</option>")
+      $("#subQuestion").append("   <option>Civil</option>")
+      $("#subQuestion").append("   <option>Computer</option>")
+    } else if ($(this)[0].value === "Business") {
+      $("#subQuestion").empty();
+      $("#subQuestion").append("   <option>Accounting</option>")
+      $("#subQuestion").append("   <option>Entrepreneurship</option>")
+      $("#subQuestion").append("   <option>Tax</option>")
+      $("#subQuestion").append("   <option>Corporate Governance</option>")
+      $("#subQuestion").append("   <option>Marketing</option>")
+    }
+
+
+  })
+
+})
+
+var myWidget = cloudinary.createUploadWidget({
+  cloudName: 'studdybudy',
+  uploadPreset: 'pwzfgaip'
+}, (error, result) => {
+  if (!error && result && result.event === "success") {
+    console.log('Done! Here is the image info: ', result.info);
+  }
+}
+)
+
+document.getElementById("upload_widget").addEventListener("click", function () {
+  myWidget.open();
+}, false);
+
+
+
+
+
 
 
 
@@ -76,7 +207,7 @@ $("#favorite").click(function (event) {
 // when user CLICKS ABOUT navlink  --> NEED TO FIX SCROLL FX
 $("#about-link").click(function (event) {
   $("html,body").animate({ // animate page to scroll to about section
-      scrollTop: $("#about").offset().top
+    scrollTop: $("#about").offset().top
   }, "slow");
 });
 
