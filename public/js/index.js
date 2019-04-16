@@ -47,6 +47,8 @@ $("#favorite").click(function (event) {
   // alert("this was clicked");
   // $("#favorite").toggleClass("change_me fas fa-star");
   // favorited = true;
+  $("#favorite").removeClass("far fa-star");
+  $("#favorite").addClass("fas fa-star");
 });
 
 
