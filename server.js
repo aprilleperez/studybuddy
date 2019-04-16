@@ -44,26 +44,6 @@ if (process.env.NODE_ENV === "test") {
   syncOptions.force = true;
 };
 
-// var order = [
-//   'userinfo',
-//   'usersearch',
-//   'favorites'
-// ];
-
-// async.eachSeries(order, function (file, callback) {
-//   var model = require(currentDir + '/' + file + '.model.js');
-//   model
-//     .sync({ force: true })
-//     .then(function () {
-//       console.log('Force-synced %s', file);
-//       // callback();
-//     })
-//     .catch(callback);
-// }, function (err) {
-//   if (err) throw err;
-//   console.log('Completed migration in order as such %o', files);
-// });
-
 // Starting the server, syncing our models ------------------------------------/
 db.sequelize.sync(syncOptions)
   .then(function () {
