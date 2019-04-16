@@ -22,7 +22,7 @@ module.exports = function (app) {
   app.get("/api/getMatches", function (req, res) {
     db.Example.findMatches(res.user).then(function (dbExamples) {
       res.json(dbExamples);
-    });
+    // });
   });
 
 

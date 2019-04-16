@@ -1,3 +1,90 @@
+body {
+  font-family: 'Nunito', sans-serif;
+  /* background: rgb(43,12,255);
+  background: linear-gradient(345deg, rgba(43,12,255,1) 0%, rgba(0,255,234,1) 85%); */
+}
+
 .list-group-item {
   line-height: 2.5;
+}
+
+.container {
+  background-color: yellow;
+}
+
+/* LANDING PAGE */
+.landingJumbo {
+  background-color: burlywood;
+  /* background: rgb(43,12,255);
+  background: linear-gradient(345deg, rgba(43,12,255,1) 0%, rgba(0,255,234,1) 85%); */
+  height: 100vh;
+  border-radius: unset;
+  padding-top: 200px;
+}
+
+.landingCTA {
+  margin-top: 100px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.signup-button {
+  margin-left: 20px;
+  margin-right: 20px;
+  width: 250px;
+  color: white;
+  border-radius: 0px;
+  border-color: white;
+}
+
+.loginMsg {
+  /* background-color: aqua; */
+  display: flex;
+  justify-content: center;
+}
+
+.aboutSection {
+  background-color: dodgerblue;
+  height: 100vh;
+}
+
+
+/* MATCH PAGE */
+.matchContainer {
+  background-color: darkorange;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.topMatches, .moreMatches {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.matchCard {
+  margin: 10px;
+}
+
+#favorite {
+  color: blue;
+  /* float: right; */
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  /* font-size: 15px; */
+}
+
+
+/* BUDDYLIST PAGE */
+.favesContainer {
+  background-color: indianred;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }

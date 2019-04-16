@@ -1,4 +1,180 @@
-<div id="home">
+{{!-- NAVBAR --}}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">Study Buddy</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+    aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" id="about-link" href="#about">About <span class="sr-only">(current)</span></a>
+      </li>
+      {{#unless authenticated}}
+      {{!-- ^^ not authenticated (falsey value) --}}
+      <li class="nav-item">
+        <a class="nav-link" href="#login-modal" data-toggle="modal" data-target="#login-modal">Login</a>
+      </li>
+      {{/unless}}
+      {{#if authenticated}}
+      {{!-- if authenticated (true) --}}
+      <li class="nav-item">
+        <a class="nav-link" href="#">Account</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Buddy List</a>
+      </li>
+      {{/if}}
+    </ul>
+  </div>
+</nav>
+
+
+{{!-- LANDING CONTENT --}}
+<div class="jumbotron landingJumbo">
+  <h5 class="text-center">Want help from other students?</h5>
+  <h1 class="text-center">Find a buddy to study the same subject as you!</h1>
+
+  <div class="landingCTA">
+    <button type="button" class="btn btn-outline-primary signup-button" data-toggle="modal" data-target="#modal1">Sign Up</button>
+    <br>
+  </div>
+
+  <p class="loginMsg"><small> or <a href="#login-modal" data-toggle="modal" data-target="#login-modal">login</a> if you have an account.</small></p>
+</div>
+
+
+<div class="aboutSection" id="about">
+  
+  <h1>This is the about section</h1>
+
+</div>
+
+
+
+{{!-- MODAL 1: CREATE ACCOUNT --}}
+<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create your account!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="createUsername" class="col-form-label">Username</label>
+            <input type="text" class="form-control" id="createUsername">
+          </div>
+          <div class="form-group">
+            <label for="createPassword" class="col-form-label">Password</label>
+            <input type="password" class="form-control" id="createPassword">
+          </div>
+          <div class="form-group">
+            <label for="createEmail" class="col-form-label">Email</label>
+            <input type="email" class="form-control" id="createEmail">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary create-button" id="createAccount-button" data-toggle="modal" data-target="#modal2" data-dismiss="modal">Create</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{{!-- MODAL 2: SURVEY --}}
+<div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Study Buddy Survey</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Fields for questions</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Password</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Email</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Message:</label>
+            <textarea class="form-control" id="message-text"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary create-button" id="survey-button" data-toggle="modal" data-target="#modal2">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{{!-- LOGIN MODAL --}}
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="username" class="col-form-label">Username</label>
+            <input type="text" class="form-control" id="username">
+          </div>
+          <div class="form-group">
+            <label for="password" class="col-form-label">Password</label>
+            <input type="password" class="form-control" id="password">
+          </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary create-button" id="login-button" data-toggle="modal">Login</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+{{!-- JS SCRIPTS --}}
+{{!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> --}}
+{{!-- <script src="/js/index.js"></script> --}}
+
+
+
+
+
+
+
+
+
+
+{{!-- <div id="home">
   <div class="container">
     <div class="row">
       <div class="col-8 offset-2">
@@ -27,7 +203,4 @@
       </div>
     </div>
   </div>
-</div>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/index.js"></script>
+</div> --}}

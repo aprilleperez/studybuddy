@@ -2,6 +2,8 @@
 
 var db = require("../models");
 
+// var fakeArray = [{id:1, text:'someText'}, {id:1, text:'Some other burger text'}];
+
 module.exports = function(app) {
   // root route: landing page. TODO: Hook in user authentication
   app.get("/", function(req, res) {
@@ -10,7 +12,9 @@ module.exports = function(app) {
       return;
     }
 
-    res.render("index");
+    res.render("index", {
+    authenticated: true // FOR TESTING 
+    });
   });
 
   app.get("/login", function(req, res) {
@@ -27,15 +31,16 @@ module.exports = function(app) {
       res.render("matches", {
         examples: dbExamples
       });
-    });
+    // });
   });
 
 
 // favorites route, user clicks on favorites from nav bar and is taken to favorites page.  TODO: update findFavorites to use sequelize.Update examples:dbExamples to handlebars properties 
-app.get("/favorites", function(req, res) {
+app.get("/user/buddylist", function(req, res) {
   db.Example.findFavorites({ where: { id: req.params.id } }).then(function(dbExample) {
-    res.render("favorites", {
-      example: dbExample
+    res.render("buddylist", {
+      authenticated: true, // FOR TESTING
+      });
     });
   });
 });
