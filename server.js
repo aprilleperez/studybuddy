@@ -3,6 +3,7 @@ var express = require("express");
 var exphbs = require("express-handlebars");
 
 var db = require("./models");
+var Seeds = require("./seeds")
 
 var app = express();
 var PORT = process.env.PORT || 3000;
@@ -31,17 +32,42 @@ var syncOptions = { force: false };
 // clearing the `testdb`
 if (process.env.NODE_ENV === "test") {
   syncOptions.force = true;
-}
+};
+
+// var order = [
+//   'userinfo',
+//   'usersearch',
+//   'favorites'
+// ];
+
+// async.eachSeries(order, function (file, callback) {
+//   var model = require(currentDir + '/' + file + '.model.js');
+//   model
+//     .sync({ force: true })
+//     .then(function () {
+//       console.log('Force-synced %s', file);
+//       // callback();
+//     })
+//     .catch(callback);
+// }, function (err) {
+//   if (err) throw err;
+//   console.log('Completed migration in order as such %o', files);
+// });
 
 // Starting the server, syncing our models ------------------------------------/
-db.sequelize.sync(syncOptions).then(function() {
-  app.listen(PORT, function() {
-    console.log(
-      "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
-      PORT,
-      PORT
-    );
+db.sequelize.sync(syncOptions)
+  .then(function () {
+    console.log("seeding ...", Seeds)
+    Seeds();
+  })
+  .then(function () {
+    app.listen(PORT, function () {
+      console.log(
+        "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
+        PORT,
+        PORT
+      );
+    });
   });
-});
 
 module.exports = app;
