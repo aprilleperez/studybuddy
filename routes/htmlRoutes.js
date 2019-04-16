@@ -5,7 +5,20 @@ var db = require("../models");
 module.exports = function(app) {
   // root route: landing page. TODO: Hook in user authentication
   app.get("/", function(req, res) {
+    if (!req.user) {
+      res.redirect("/login");
+      return;
+    }
+
     res.render("index");
+  });
+
+  app.get("/login", function(req, res) {
+    // If the user already has an account send them to the members page
+    if (req.user) {
+      res.redirect("/");
+    }
+    res.render("login");
   });
 
 // user is taken to User Search (results/matches) page /user/matches TODO: update findAll to use algorithm.js.Update examples:dbExamples to handlebars properties 
