@@ -14,14 +14,13 @@ module.exports = function(app) {
 
   app.get("/user/matches", function(req, res) {
       res.render("matchpage", {
-        authenticated: true,
-        // favorited: true
+        authenticated: true, // FOR TESTING
       });
   });
 
   app.get("/user/buddylist", function(req, res) {
     res.render("buddylist", {
-      authenticated: true
+      authenticated: true  // FOR TESTING
     });
 });
 
