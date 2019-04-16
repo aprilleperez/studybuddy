@@ -9,7 +9,7 @@ var passport = require("./config/passport");
 var db = require("./models");
 
 var app = express();
-var PORT = process.env.PORT || 3004;
+var PORT = process.env.PORT || 3001;
 
 // Middleware
 app.use(express.urlencoded({ extended: false }));
@@ -44,7 +44,7 @@ if (process.env.NODE_ENV === "test") {
 }
 
 // Starting the server, syncing our models ------------------------------------/
-db.sequelize.sync(syncOptions).then(function() {
+//db.sequelize.sync(syncOptions).then(function() {
   app.listen(PORT, function() {
     console.log(
       "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
@@ -52,6 +52,6 @@ db.sequelize.sync(syncOptions).then(function() {
       PORT
     );
   });
-});
+//});
 
 module.exports = app;

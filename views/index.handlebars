@@ -1,33 +1,273 @@
-<div id="home">
-  <div class="container">
-    <div class="row">
-      <div class="col-8 offset-2">
-        <h1>{{msg}}</h1>
-        <h2>This is our Home Page!</h2>
-        <form class="clearfix mb-4" action="POST">
+{{!-- NAVBAR --}}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">Study Buddy</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+    aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" id="about-link" href="#about">About <span class="sr-only">(current)</span></a>
+      </li>
+      {{#unless authenticated}}
+      {{!-- ^^ not authenticated (falsey value) --}}
+      <li class="nav-item">
+        <a class="nav-link" href="#login-modal" data-toggle="modal" data-target="#login-modal">Login</a>
+      </li>
+      {{/unless}}
+      {{#if authenticated}}
+      {{!-- if authenticated (true) --}}
+      <li class="nav-item">
+        <a class="nav-link" href="#">Account</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/user/buddylist">Buddy List</a>
+      </li>
+      {{/if}}
+    </ul>
+  </div>
+</nav>
+
+
+{{!-- LANDING CONTENT --}}
+<div class="jumbotron landingJumbo">
+  <h5 class="text-center">Want help from other students?</h5>
+  <h1 class="text-center">Find a buddy to study the same subject as you!</h1>
+
+  <div class="landingCTA">
+    <button type="button" class="btn btn-outline-primary signup-button" data-toggle="modal" data-target="#modal1">Sign
+      Up</button>
+    <br>
+  </div>
+
+  <p class="loginMsg"><small> or <a href="#login-modal" data-toggle="modal" data-target="#login-modal">login</a> if you
+      have an account.</small></p>
+</div>
+
+
+<div class="aboutSection" id="about">
+
+  <h1>This is the about section</h1>
+
+</div>
+
+
+
+{{!-- MODAL 1: CREATE ACCOUNT --}}
+<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create your account!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
           <div class="form-group">
-            <label for="example-text">Example Text</label>
-            <input type="text" id="example-text" class="form-control" aria-describedby="example-text" placeholder="Enter Example Text">
+            <label for="createUsername" class="col-form-label">Username</label>
+            <input type="text" class="form-control" id="createUsername" placeholder="Username">
           </div>
           <div class="form-group">
-            <label for="example-description">Example Description</label>
-            <textarea class="form-control" id="example-description" aria-describedby="example-description" placeholder="Enter Example Description"></textarea>
+            <label for="createPassword" id="passwordInput" class="col-form-label">Password</label>
+            <input type="password" class="form-control" id="createPassword" placeholder="Password">
           </div>
-          <button id="submit" class="btn btn-primary float-right">Submit</button>
+          <div class="form-group">
+            <label for="createEmail" class="col-form-label">Email</label>
+            <input type="email" class="form-control" id="createEmail">
+          </div>
+          <button type="button" id="upload_widget" class="cloudinary-button">Upload Profile Picture</button>
         </form>
-        <h3>Examples:</h3>
-        <ul id="example-list" class="list-group">
-          {{#each examples}}
-          <li data-id="{{this.id}}" class="list-group-item">
-            <a href="example/{{this.id}}">{{this.text}}</a>
-            <button class="btn btn-danger float-right delete">ｘ</button>
-          </li>
-          {{/each}}
-        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary create-button" id="createAccount-button" data-toggle="modal"
+          data-target="#modal2" data-dismiss="modal">Create</button>
       </div>
     </div>
   </div>
 </div>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/index.js"></script>
+
+{{!-- MODAL 2: SURVEY --}}
+<div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Study Buddy Survey</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <form>
+          <!--topic Question Modal-->
+          <div id="topic-question">
+            <div class="form-group">
+              <span class="topicQuestion" style="white-space: nowrap">
+                <label for="topicQuestion">Topic</label>
+                <select class="form-control w-75" id="topicQuestion">
+                  <option value="Math">Math</option>
+                  <option value="Science">Science</option>
+                  <option value="Law">Law</option>
+                  <option value="Coding">Coding</option>
+                  <option value="English">English</option>
+                  <option value="Exercise Sciences">Exercise Sciences</option>
+                  <option value="Engineering">Engineering</option>
+                  <option value="Business">Business</option>
+                </select>
+              </span>
+            </div>
+          </div>
+
+
+          <!--sub topic question - need jquery to dynamically display based -->
+          <div id="sub-topic-question">
+            <div class="form-group">
+              <span class="subQuestion" style="white-space: nowrap">
+                <label for="subQuestion">Sub-Topic</label>
+                <select class="form-control w-75" id="subQuestion">
+                </select>
+              </span>
+            </div>
+          </div>
+
+          <!--remote Question Modal-->
+          <div id="remote-question">
+            <div class="form-group">
+              <span class="remoteQuestion" style="white-space: nowrap">
+                <label for="remoteQuestion">Remote</label>
+                <select class="form-control w-75" id="remoteQuestion">
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+              </span>
+            </div>
+          </div>
+
+          <!--in person Question Modal-->
+          <div id="in-person">
+            <div class="form-group">
+              <span class="inPerson" style="white-space: nowrap">
+                <label for="inPerson">In Person</label>
+                <select class="form-control w-75" id="inPerson">
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+              </span>
+            </div>
+          </div>
+
+          <!--zip code Question Modal-->
+          <div id="zip-Code">
+            <div class="form-group">
+              <label for="zipCode">Zip Code</label>
+              <input type="text" class="form-control" id="zipCode" aria-describedby="zipHelp" placeholder="98101">
+            </div>
+          </div>
+
+
+          <!--time Question Modal-->
+          <div id="time-Question">
+            <div class="form-group">
+              <span class="timeQuestion" style="white-space: nowrap">
+                <label for="timeQuestion">Meeting Time</label>
+                <select class="form-control w-75" id="timeQuestion">
+                  <option value="Morning">Morning</option>
+                  <option value="Afternoon">Afternoon</option>
+                  <option value="Evening">Evening</option>
+                </select>
+              </span>
+            </div>
+          </div>
+          <!-- Check Box question for day of the week-->
+
+
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" name="daysOfWeek" value="Monday">
+            <label for="Monday">Monday</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" name="daysOfWeek" value="Tuesday">
+            <label for="Tuesday">Tuesday</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" name="daysOfWeek" value="Wednesday">
+            <label for="Wednesday">Wednesday</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" name="daysOfWeek" value="Thursday">
+            <label for="Thursday">Thursday</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" name="daysOfWeek" value="Friday">
+            <label for="Friday">Friday</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" name="daysOfWeek" value="Saturday">
+            <label for="Saturday">Saturday</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" name="daysOfWeek" value="Sunday">
+            <label for="Sunday">Sunday</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" name="daysOfWeek" value="Weekday">
+            <label for="Weekday">Weekday</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" name="daysOfWeek" value="Weekend">
+            <label for="Weekend">Weekend</label>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary create-button" id="submitButton" data-toggle="modal"
+          data-target="#modal2">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{{!-- LOGIN MODAL --}}
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="username" class="col-form-label">Username</label>
+            <input type="text" class="form-control" id="username">
+          </div>
+          <div class="form-group">
+            <label for="password" class="col-form-label">Password</label>
+            <input type="password" class="form-control" id="password">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary create-button" id="login-button"
+              data-toggle="modal">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+{{!-- JS SCRIPTS --}}
+{{!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> --}}
+{{!-- <script src="/js/index.js"></script> --}}
