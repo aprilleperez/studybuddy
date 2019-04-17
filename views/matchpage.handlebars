@@ -8,7 +8,7 @@
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#about">About <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/#about">About <span class="sr-only">(current)</span></a>
             </li>
             {{#unless authenticated}}
             <li class="nav-item">
@@ -17,7 +17,7 @@
             {{/unless}}
             {{#if authenticated}}
             <li class="nav-item">
-                <a class="nav-link" href="#">Account</a>
+                <a class="nav-link" href="/logout">Logout</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/user/buddylist">Buddy List</a>
@@ -42,7 +42,7 @@
             <img src="https://cdn.networkrail.co.uk/wp-content/uploads/2016/12/Adriana-300x300.jpg" class="card-img-top"
                 alt="Match Photo">
 
-            <i id="favorite" class="far fa-star"></i>
+            <i id="favorite" class="favoriteButton far fa-star"></i>
 
             {{!-- NEED TO EDIT FAVORITE STAR TO GENERATE WITH ID KEY IN NEXT PHASE --}}
             <div class="card-body cardInfo">
@@ -100,19 +100,17 @@
 
 
 {{!-- DRAFT OF DYNAMIC HBS CREATION --}}
-{{#each person}}
-{{!-- person is dummy var for someone --}}
+{{#each matches}}
 <div class="card matchCard" style="width: 18rem;">
     <img src="{{this.photo}}" class="card-img-top" alt="Match Photo">
 
     <i data-id="{{this.id}}" id="favorite" class="favoriteButton far fa-star"></i>
 
-    {{!-- NEED TO EDIT FAVORITE STAR TO GENERATE WITH ID KEY IN NEXT PHASE --}}
     <div class="card-body cardInfo">
-        {{!-- <h5 class="card-title">Card title</h5> --}}
+        <p class="card-text">{{this.first_name}} {{this.last_name}}</p>
         <p class="card-text">Username: {{this.username}}</p>
-        <p class="card-text">Email: {{this.email}}</p> {{!-- this.email  --}}
-        <p class="card-text">Located: {{this.location}}</p> {{!-- this.location  --}}
+        <p class="card-text"><a href="mailto:{{this.email}}">Email: {{this.email}}</a></p>
+        <p class="card-text">Located: {{this.location}}</p>
     </div>
 </div>
 {{/each}}
