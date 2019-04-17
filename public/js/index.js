@@ -1,18 +1,22 @@
+/////////////////////////////////////////////////////////////////
+// PRE-DEFINED FUNCTIONS                                       //
+/////////////////////////////////////////////////////////////////
+
 function loginAction() {
   // NEED THESE VARS TO PASS THROUGH AUTHENTICATION
-  username = $("#username").val().trim(); // grab user input for username
-  password = $("#password").val().trim(); // grab user input for password
+  username = $("#username").val().trim();
+  password = $("#password").val().trim();
   alert(username + password);
-
 };
 
 function createAccount() {
   // NEED THESE VARS TO STORE INTO DB
   // Capture values from form field
-  newUsername = $("#createUsername").val().trim(); // grab user input for username
-  newPassword = $("#createPassword").val().trim(); // grab user input for password
-  newEmail = $("#createEmail").val().trim(); // grab user input for password
+  newUsername = $("#createUsername").val().trim();
+  newPassword = $("#createPassword").val().trim();
+  newEmail = $("#createEmail").val().trim();
 
+  // TODO: pass values as object to apiRoutes.js
   // store captured values into newUser object NEED TO FIX
   // newUser = {
   //   username: newUsername,
@@ -22,59 +26,49 @@ function createAccount() {
   // }
 };
 
-////////////////////////////////////////////
-// ON CLICK ACTIONS                       //
-////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
+// ON CLICK ACTIONS                                            //
+/////////////////////////////////////////////////////////////////
 
-// when user CLICKS LOGIN button
+// when user CLICKS ABOUT navlink
+$("#about-link").click(function (event) {
+  $("html,body").animate({
+    scrollTop: $("#about").offset().top
+  }, "slow");
+});
+
+
+// when user CLICKS LOGIN navlink
 $("#login-button").click(function (event) {
   loginAction();
   $("#username").val("");
   $("#password").val("");
 });
 
-// when user CLICKS CREATE ACCOUNT button
+
+// when user CLICKS SIGN UP button
+$(".signup-button").on("click", function () {
+  // grabs users input and prevents clicking outside modal
+  event.preventDefault();
+  $('#modal1').modal({ backdrop: 'static', keyboard: false })
+  // grabs user input
+});
+
+
+// when user CLICKS CREATE ACCOUNT button on modal 1
 $("#createAccount-button").click(function (event) {
   // event.preventDefault();
-  $('#modal2').modal({ backdrop: 'static', keyboard: false })
-  $('#modal1').modal('hide');
+  $('#modal2').modal({ backdrop: 'static', keyboard: false }) // can't click outside modal to close
+  $('#modal1').modal('hide'); // hides first modal (to not overlap)
   createAccount();
   $("#createUsername").val("");
   $("#createPassword").val("");
   $("#createEmail").val("");
 });
 
-// var favorited = false;
 
-$("#favorite").click(function (event) {
-  // alert("this was clicked");
-  // $("#favorite").toggleClass("change_me fas fa-star");
-  // favorited = true;
-  $("#favorite").removeClass("far fa-star");
-  $("#favorite").addClass("fas fa-star");
-});
-
-
-
-
-// $(".createAccount-button").on("click", function () {
-//   event.preventDefault();
-//   $('#modal2').modal({ backdrop: 'static', keyboard: false })
-//   $('#modal1').modal('hide');
-// });
-
-
-$(".signup-button").on("click", function () {
-  // grabs users input and prevents clicking outside modal
-  event.preventDefault();
-  $('#modal1').modal({ backdrop: 'static', keyboard: false })
-  // grabs user input
-
-});
-
-
-
-$("#submitButton").on("click", function () {
+// when user CLICKS SUBMIT BUTTON on SURVEY modal 2
+$("#submitButton").on("click", function () { // submit button on survey modal
   // grabs user input, prevents being able to click outside of modal, and hides modal one
   event.preventDefault();
   $('#modal2').modal({ backdrop: 'static', keyboard: false })
@@ -110,6 +104,8 @@ $("#submitButton").on("click", function () {
 
 });
 
+
+// when TOPICS are TOGGLED
 $(document).ready(function () {
   $("#topicQuestion").change(function () {
 
@@ -175,21 +171,37 @@ $(document).ready(function () {
       $("#subQuestion").append("   <option>Corporate Governance</option>")
       $("#subQuestion").append("   <option>Marketing</option>")
     }
-
-
   })
+});
 
-})
+
+// when user CLICKS FAVORITE STAR button
+$(".favoriteButton").click(function (event) { // when favorite button (class) is clicked
+  $.ajax(
+    "/api/updateFavorite", {
+      type: "put",
+      data: { id: $(this).data("id") } // targets specific button clicked with that ID
+    }).then(function (data) {
+      $(this).removeClass("far fa-star");
+      $(this).addClass("fas fa-star");
+      location.reload();
+    })
+});
+
+
+
+/////////////////////////////////////////////////////////////////
+// CLOUDINARY THINGS                                           //
+/////////////////////////////////////////////////////////////////
 
 var myWidget = cloudinary.createUploadWidget({
   cloudName: 'bootcampbuddy',
- uploadPreset: 'rnuetcvd'
+  uploadPreset: 'rnuetcvd'
 }, (error, result) => {
   if (!error && result && result.event === "success") {
     console.log('Done! Here is the image info: ', result.info);
   }
-}
-)
+});
 
 document.getElementById("upload_widget").addEventListener("click", function () {
   myWidget.open();
@@ -199,17 +211,6 @@ document.getElementById("upload_widget").addEventListener("click", function () {
 
 
 
-
-
-
-
-
-// when user CLICKS ABOUT navlink  --> NEED TO FIX SCROLL FX
-$("#about-link").click(function (event) {
-  $("html,body").animate({ // animate page to scroll to about section
-    scrollTop: $("#about").offset().top
-  }, "slow");
-});
 
 
 
