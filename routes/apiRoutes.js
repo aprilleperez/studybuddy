@@ -22,21 +22,21 @@ module.exports = function (app) {
   });
   // modal 2 user survey results on click are sent to Table 2: User Search in DB (new or additional) (survey). TODO: update db.Example per handlebars specifications
   app.post("/api/submitSurvey", function (req, res) {
-    db.Example.createSurvey(req.body).then(function (dbExample) {
-      res.json(dbExample);
+    db.Survey.create(req.body).then(function (dbSurvey) {
+      res.json(dbSurvey);
     });
   });
 
   // user updates a survey
   app.put("/api/submitSurvey", function (req, res) {
-    db.Example.createSurvey(req.body).then(function (dbExample) {
-      res.json(dbExample);
+    db.Survey.update(req.body).then(function (dbSurvey) {
+      res.json(dbSurvey);
     });
   });
 
   // ????? get matches for user for user search (match results) page. TODO: update db.Example per handlebars specifications 
   app.get("/api/getMatches", function (req, res) {
-    db.Example.findMatches(res.user).then(function (dbExamples) {
+    db.Example.findAll(res.user).then(function (dbExamples) {
       // need proper route to html page showing the matches NOT dbExamples
       res.json(dbExamples);
     });
@@ -45,22 +45,22 @@ module.exports = function (app) {
 
   // user clicks to favorite a profile and this information is sent to Table 3: Favorites in DB (favorites). TODO: update db.Example per handlebars specifications to pass in clicked favorite user by favUserID AND if a favorite, pass true, else false for res.isFav. This will allow the user to both favorite and un-favorite other users. (GET or POST here??  I think POST)
   app.post("/api/updateFavorite", function (req, res) {
-    db.Example.updateFavorite(res.user, res.favUserID, res.isFav).then(function (dbExamples) {
-      res.json(dbExamples);
+    db.favorites.create(res.user, res.userId, res.favoriteId).then(function (dbfavorites) {
+      res.json(dbfavorites);
     });
   });
 
   // user clicks on favorites and is presented with a list of all of the people they have marked as favorites. TODO: update db.Example per handlebars specifications 
   app.get("/api/getFavorites", function (req, res) {
-    db.Example.findFavorites(res.user).then(function (dbExamples) {
+    db.favorites.findAll(res.user).then(function (dbExamples) {
       // need proper route to html page showing user's favorites NOT dbExamples
-      res.json(dbExamples);
+      res.json(dbfavorites);
     });
   });
   // user updates favorites
   app.put("/api/updateFavorite", function (req, res) {
-    db.Example.updateFavorite(res.user, res.favUserID, res.isFav).then(function (dbExamples) {
-      res.json(dbExamples);
+    db.favorites.update(res.user, res.userID, res.favoriteId).then(function (dbfavorites) {
+      res.json(dbfavorites);
     });
   });
 
