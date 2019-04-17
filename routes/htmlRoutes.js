@@ -39,7 +39,7 @@ module.exports = function(app) {
 app.get("/user/buddylist", isAuthenticated,  function(req, res) {
   db.Users.findAll({ }).then(function(dbExample) {
     res.render("buddylist", {favorites: dbExample});
-    });
+    });``
   });
 
   // Route for logging user out
