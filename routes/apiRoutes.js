@@ -12,8 +12,9 @@ module.exports = function (app) {
   // otherwise send back an error
   app.post("/api/signup", function (req, res) {
     console.log(req.body);
-    db.Users.create(req.body).then(function () {
-      res.sendStatus(200);
+    db.Users.create(req.body).then(function (userData) {
+      res.json(userData)
+      // res.sendStatus(200);
     }).catch(function (err) {
       console.log(err);
       res.json(err);
@@ -22,14 +23,18 @@ module.exports = function (app) {
   });
   // modal 2 user survey results on click are sent to Table 2: User Search in DB (new or additional) (survey). TODO: update db.Example per handlebars specifications
   app.post("/api/submitSurvey", function (req, res) {
-    db.Survey.create(req.body).then(function (dbSurvey) {
-      res.json(dbSurvey);
+    // res.json(req.body)
+    db.Survey.create(req.body).then(function () {
+      res.sendStatus(200);
+    }).catch(function (err) {
+      console.log(err);
+      res.json(err);
     });
   });
 
   // user updates a survey
   app.put("/api/submitSurvey", function (req, res) {
-    db.Survey.update(req.body).then(function (dbSurvey) {
+    db.Survey.update(req.body).then(function () {
       res.json(dbSurvey);
     });
   });
