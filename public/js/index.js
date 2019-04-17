@@ -9,10 +9,10 @@ function loginAction() {
   $.post("/api/login", {
     email: userEmail,
     password: password
-  }).then(function(data) {
+  }).then(function (data) {
     window.location.replace(data);
     // If there's an error, log the error
-  }).catch(function(err) {
+  }).catch(function (err) {
     console.log(err);
   });
 };
@@ -31,7 +31,7 @@ function createAccount() {
   var newEmail = $("#createEmail").val().trim(); // grab user input for password
   var newLocation = $("#createLocation").val().trim(); // grab user input for location
   var cloudPhoto = $("#cloudUrl").val().trim();//grab url from hidden value that was stored with cloudinary response url
-  console.log("cloudUrl is this:",cloudPhoto);
+  console.log("cloudUrl is this:", cloudPhoto);
 
   // store captured values into newUser object to send to DB
   var newUser = {
@@ -46,7 +46,7 @@ function createAccount() {
     updatedAt: new Date()
   }
 
-  $.post("/api/signup", newUser).then(function(data) {
+  $.post("/api/signup", newUser).then(function (data) {
     if (data != 200) {
       // log/show error
     }
@@ -54,8 +54,25 @@ function createAccount() {
   }).catch(handleLoginErr);
 };
 
+// function for creating the favorites for the puse and post
+function createfavorites() {
+  ;
+  var newuserId = $("#createuserId").val().trim(); // grab user input for userId
+  var newfavoriteId = $("#createfavoriteId").val().trim();
 
-
+  var favorites = {
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    userId: newuserId,
+    favoriteId: newfavoriteId,
+  }
+  $.post("/api/favorites", favorites).then(function (data) {
+    if (data != 200) {
+      // log/show error
+    }
+    // If there's an error, handle it by throwing up a bootstrap alert
+  }).catch(handleLoginErr);
+}
 
 /////////////////////////////////////////////////////////////////
 // ON CLICK ACTIONS                                            //
@@ -123,7 +140,7 @@ $("#submitButton").on("click", function () { // submit button on survey modal
   var passwordInput1 = $("#userPassword").val();
   var emailInput1 = $("#userEmail").val();
   var profilePictureInput1 = $("#userPictureInput").val();
-  
+
 
   console.log(topicQuestion1)
   console.log(subQuestion1)
@@ -239,9 +256,10 @@ var myWidget = cloudinary.createUploadWidget({
     console.log('Done! Here is the image info: ', result.info.url);
     let pictureImage = result.info.url
     // updates hidden input with response url
-      $("#cloudUrl").val(pictureImage)}
+    $("#cloudUrl").val(pictureImage)
+  }
 });
-  // opens widget when click upload button
+// opens widget when click upload button
 document.getElementById("upload_widget").addEventListener("click", function () {
   myWidget.open();
 }, false);
