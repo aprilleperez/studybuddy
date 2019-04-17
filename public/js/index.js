@@ -29,6 +29,8 @@ function createAccount() {
   var newPassword = $("#createPassword").val().trim(); // grab user input for password
   var newEmail = $("#createEmail").val().trim(); // grab user input for password
   var newLocation = $("#createLocation").val().trim(); // grab user input for location
+  var cloudPhoto = $("#cloudUrl").val().trim();//grab url from hidden value that was stored with cloudinary response url
+  console.log("cloudUrl is this:",cloudPhoto);
 
   // TODO: pass values as object to apiRoutes.js
   // store captured values into newUser object NEED TO FIX
@@ -36,7 +38,7 @@ function createAccount() {
     username: newUsername,
     password: newPassword,
     email: newEmail,
-    photo: "http://www.fake.com/", // TODO: need to get the photo from cloudinary
+    photo: cloudPhoto,
     first_name: newFirstname,
     last_name: newLastname,
     location: newLocation,
@@ -124,6 +126,7 @@ $("#submitButton").on("click", function () { // submit button on survey modal
   var passwordInput1 = $("#userPassword").val();
   var emailInput1 = $("#userEmail").val();
   var profilePictureInput1 = $("#userPictureInput").val();
+  
 
   console.log(topicQuestion1)
   console.log(subQuestion1)
@@ -228,16 +231,19 @@ $(".favoriteButton").click(function (event) { // when favorite button (class) is
 /////////////////////////////////////////////////////////////////
 // CLOUDINARY THINGS                                           //
 /////////////////////////////////////////////////////////////////
-
+// creates widget w/ relative name/preset keys
 var myWidget = cloudinary.createUploadWidget({
   cloudName: 'bootcampbuddy',
   uploadPreset: 'rnuetcvd'
 }, (error, result) => {
   if (!error && result && result.event === "success") {
-    console.log('Done! Here is the image info: ', result.info);
-  }
+    // logs the results of sending image to cloudinary
+    console.log('Done! Here is the image info: ', result.info.url);
+    let pictureImage = result.info.url
+    // updates hidden input with response url
+      $("#cloudUrl").val(pictureImage)}
 });
-
+  // opens widget when click upload button
 document.getElementById("upload_widget").addEventListener("click", function () {
   myWidget.open();
 }, false);
