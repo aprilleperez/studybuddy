@@ -55,8 +55,8 @@
 
 
 {{!-- MODAL 1: CREATE ACCOUNT --}}
-<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Create your account!</h5>
@@ -66,6 +66,14 @@
       </div>
       <div class="modal-body">
         <form>
+          <div class="form-group">
+            <label for="createFirstname" class="col-form-label">First Name</label>
+            <input type="text" class="form-control" id="createFirstname" placeholder="Sam">
+          </div>
+          <div class="form-group">
+            <label for="createLastname" class="col-form-label">Last Name</label>
+            <input type="text" class="form-control" id="createLastname" placeholder="Smith">
+          </div>
           <div class="form-group">
             <label for="createUsername" class="col-form-label">Username</label>
             <input type="text" class="form-control" id="createUsername" placeholder="Username">
@@ -78,7 +86,11 @@
             <label for="createEmail" class="col-form-label">Email</label>
             <input type="email" class="form-control" id="createEmail" placeholder="example@email.com">
           </div>
-          <button type="button" id="upload_widget" class="cloudinary-button">Upload Profile Picture</button>
+          <div class="form-group">
+            <label for="createLocation" class="col-form-label">Location</label>
+            <input type="text" class="form-control" id="createLocation" placeholder="Ex: 98101">
+          </div>
+          <button type="button" pattern="[0-9]*" id="upload_widget" class="cloudinary-button">Upload Profile Picture</button>
         </form>
       </div>
       <div class="modal-footer">
@@ -161,12 +173,12 @@
           </div>
 
           <!--zip code Question Modal-->
-          <div id="zip-Code">
+          {{!-- <div id="zip-Code">
             <div class="form-group">
               <label for="zipCode">Zip Code</label>
               <input type="text" class="form-control" id="zipCode" aria-describedby="zipHelp" placeholder="98101">
             </div>
-          </div>
+          </div> --}}
 
 
           <!--time Question Modal-->

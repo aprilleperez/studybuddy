@@ -23,21 +23,23 @@ function loginAction() {
 function createAccount() {
   // NEED THESE VARS TO STORE INTO DB
   // Capture values from form field
+  var newFirstname = $("#createFirstname").val().trim(); // grab user input for first name
+  var newLastname = $("#createLastname").val().trim(); // grab user input for last name
   var newUsername = $("#createUsername").val().trim(); // grab user input for username
   var newPassword = $("#createPassword").val().trim(); // grab user input for password
   var newEmail = $("#createEmail").val().trim(); // grab user input for password
+  var newLocation = $("#createLocation").val().trim(); // grab user input for location
 
   // TODO: pass values as object to apiRoutes.js
   // store captured values into newUser object NEED TO FIX
-  //TODO: currently there is no way to capture user first name, last name, or location.
   var newUser = {
     username: newUsername,
     password: newPassword,
     email: newEmail,
-    photo: "http://www.fake.com/", // need to get the photo from cloudinary
-    first_name: 'NEEDTOPASSIN',
-    last_name: 'NEEDTOPASSIN',
-    location: 98001, // Need to pass in
+    photo: "http://www.fake.com/", // TODO: need to get the photo from cloudinary
+    first_name: newFirstname,
+    last_name: newLastname,
+    location: newLocation,
     createdAt: new Date(),
     updatedAt: new Date()
   }
@@ -91,9 +93,12 @@ $("#createAccount-button").click(function (event) {
   $('#modal2').modal({ backdrop: 'static', keyboard: false }) // can't click outside modal to close
   $('#modal1').modal('hide'); // hides first modal (to not overlap)
   createAccount();
+  $("#createFirstname").val("");
+  $("#createLastname").val("");
   $("#createUsername").val("");
   $("#createPassword").val("");
   $("#createEmail").val("");
+  $("#createLocation").val("");
 });
 
 
