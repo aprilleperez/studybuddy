@@ -1,26 +1,56 @@
 function loginAction() {
   // NEED THESE VARS TO PASS THROUGH AUTHENTICATION
-  username = $("#username").val().trim(); // grab user input for username
-  password = $("#password").val().trim(); // grab user input for password
-  alert(username + password);
+  var userEmail = $("#userEmail").val().trim(); // grab user input for username
+  var password = $("#password").val().trim(); // grab user input for password
+  //alert(userEmail + password);
+
+  $.post("/api/login", {
+    email: userEmail,
+    password: password
+  }).then(function(data) {
+    window.location.replace(data);
+    // If there's an error, log the error
+  }).catch(function(err) {
+    console.log(err);
+  });
 
 };
 
 function createAccount() {
   // NEED THESE VARS TO STORE INTO DB
   // Capture values from form field
-  newUsername = $("#createUsername").val().trim(); // grab user input for username
-  newPassword = $("#createPassword").val().trim(); // grab user input for password
-  newEmail = $("#createEmail").val().trim(); // grab user input for password
+  var newUsername = $("#createUsername").val().trim(); // grab user input for username
+  var newPassword = $("#createPassword").val().trim(); // grab user input for password
+  var newEmail = $("#createEmail").val().trim(); // grab user input for password
 
   // store captured values into newUser object NEED TO FIX
-  // newUser = {
-  //   username: newUsername,
-  //   password: newPassword,
-  //   email: newEmail,
-  //   photo: example-photo
-  // }
+  //TODO: currently there is no way to capture user first name, last name, or location.
+  var newUser = {
+    username: newUsername,
+    password: newPassword,
+    email: newEmail,
+    photo: "http://www.fake.com/", // need to get the photo from cloudinary
+    first_name: 'NEEDTOPASSIN',
+    last_name: 'NEEDTOPASSIN',
+    location: 98001, // Need to pass in
+    createdAt: new Date(),
+    updatedAt: new Date()
+  }
+
+  $.post("/api/signup", newUser).then(function(data) {
+    if (data != 200) {
+      // log/show error
+    }
+    // If there's an error, handle it by throwing up a bootstrap alert
+  }).catch(handleLoginErr);
+
+
 };
+
+function handleLoginErr(err) {
+  $("#alert .msg").text(err.responseJSON);
+  $("#alert").fadeIn(500);
+}
 
 ////////////////////////////////////////////
 // ON CLICK ACTIONS                       //

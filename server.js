@@ -11,7 +11,7 @@ var Seeds = require("./seeds")
 var seedSurvey = require("./seedSurvey")
 
 var app = express();
-var PORT = process.env.PORT || 3001;
+var PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.urlencoded({ extended: false }));
@@ -34,8 +34,8 @@ app.engine(
 app.set("view engine", "handlebars");
 
 // Routes
-require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
+require("./routes/apiRoutes")(app);
 
 var syncOptions = { force: true };
 
