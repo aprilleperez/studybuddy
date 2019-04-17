@@ -182,8 +182,8 @@ $(document).ready(function () {
 })
 
 var myWidget = cloudinary.createUploadWidget({
-  cloudName: 'studdybudy',
-  uploadPreset: 'pwzfgaip'
+  cloudName: 'bootcampbuddy',
+ uploadPreset: 'rnuetcvd'
 }, (error, result) => {
   if (!error && result && result.event === "success") {
     console.log('Done! Here is the image info: ', result.info);
