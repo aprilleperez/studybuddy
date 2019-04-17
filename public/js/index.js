@@ -4,26 +4,52 @@
 
 function loginAction() {
   // NEED THESE VARS TO PASS THROUGH AUTHENTICATION
-  username = $("#username").val().trim();
-  password = $("#password").val().trim();
-  alert(username + password);
+  var userEmail = $("#userEmail").val().trim(); // grab user input for username
+  var password = $("#password").val().trim(); // grab user input for password
+  //alert(userEmail + password);
+
+  $.post("/api/login", {
+    email: userEmail,
+    password: password
+  }).then(function(data) {
+    window.location.replace(data);
+    // If there's an error, log the error
+  }).catch(function(err) {
+    console.log(err);
+  });
+
 };
 
 function createAccount() {
   // NEED THESE VARS TO STORE INTO DB
   // Capture values from form field
-  newUsername = $("#createUsername").val().trim();
-  newPassword = $("#createPassword").val().trim();
-  newEmail = $("#createEmail").val().trim();
+  var newUsername = $("#createUsername").val().trim(); // grab user input for username
+  var newPassword = $("#createPassword").val().trim(); // grab user input for password
+  var newEmail = $("#createEmail").val().trim(); // grab user input for password
 
   // TODO: pass values as object to apiRoutes.js
   // store captured values into newUser object NEED TO FIX
-  // newUser = {
-  //   username: newUsername,
-  //   password: newPassword,
-  //   email: newEmail,
-  //   photo: example-photo
-  // }
+  //TODO: currently there is no way to capture user first name, last name, or location.
+  var newUser = {
+    username: newUsername,
+    password: newPassword,
+    email: newEmail,
+    photo: "http://www.fake.com/", // need to get the photo from cloudinary
+    first_name: 'NEEDTOPASSIN',
+    last_name: 'NEEDTOPASSIN',
+    location: 98001, // Need to pass in
+    createdAt: new Date(),
+    updatedAt: new Date()
+  }
+
+  $.post("/api/signup", newUser).then(function(data) {
+    if (data != 200) {
+      // log/show error
+    }
+    // If there's an error, handle it by throwing up a bootstrap alert
+  }).catch(handleLoginErr);
+
+
 };
 
 /////////////////////////////////////////////////////////////////
@@ -36,6 +62,10 @@ $("#about-link").click(function (event) {
     scrollTop: $("#about").offset().top
   }, "slow");
 });
+function handleLoginErr(err) {
+  $("#alert .msg").text(err.responseJSON);
+  $("#alert").fadeIn(500);
+}
 
 
 // when user CLICKS LOGIN navlink
@@ -210,116 +240,3 @@ document.getElementById("upload_widget").addEventListener("click", function () {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// // Get references to page elements
-// var $exampleText = $("#example-text");
-// var $exampleDescription = $("#example-description");
-// var $submitBtn = $("#submit");
-// var $exampleList = $("#example-list");
-
-// // The API object contains methods for each kind of request we'll make
-// var API = {
-//   saveExample: function(example) {
-//     return $.ajax({
-//       headers: {
-//         "Content-Type": "application/json"
-//       },
-//       type: "POST",
-//       url: "api/examples",
-//       data: JSON.stringify(example)
-//     });
-//   },
-//   getExamples: function() {
-//     return $.ajax({
-//       url: "api/examples",
-//       type: "GET"
-//     });
-//   },
-//   deleteExample: function(id) {
-//     return $.ajax({
-//       url: "api/examples/" + id,
-//       type: "DELETE"
-//     });
-//   }
-// };
-
-// // refreshExamples gets new examples from the db and repopulates the list
-// var refreshExamples = function() {
-//   API.getExamples().then(function(data) {
-//     var $examples = data.map(function(example) {
-//       var $a = $("<a>")
-//         .text(example.text)
-//         .attr("href", "/example/" + example.id);
-
-//       var $li = $("<li>")
-//         .attr({
-//           class: "list-group-item",
-//           "data-id": example.id
-//         })
-//         .append($a);
-
-//       var $button = $("<button>")
-//         .addClass("btn btn-danger float-right delete")
-//         .text("ｘ");
-
-//       $li.append($button);
-
-//       return $li;
-//     });
-
-//     $exampleList.empty();
-//     $exampleList.append($examples);
-//   });
-// };
-
-// // handleFormSubmit is called whenever we submit a new example
-// // Save the new example to the db and refresh the list
-// var handleFormSubmit = function(event) {
-//   event.preventDefault();
-
-//   var example = {
-//     text: $exampleText.val().trim(),
-//     description: $exampleDescription.val().trim()
-//   };
-
-//   if (!(example.text && example.description)) {
-//     alert("You must enter an example text and description!");
-//     return;
-//   }
-
-//   API.saveExample(example).then(function() {
-//     refreshExamples();
-//   });
-
-//   $exampleText.val("");
-//   $exampleDescription.val("");
-// };
-
-// // handleDeleteBtnClick is called when an example's delete button is clicked
-// // Remove the example from the db and refresh the list
-// var handleDeleteBtnClick = function() {
-//   var idToDelete = $(this)
-//     .parent()
-//     .attr("data-id");
-
-//   API.deleteExample(idToDelete).then(function() {
-//     refreshExamples();
-//   });
-// };
-
-// // Add event listeners to the submit and delete buttons
-// $submitBtn.on("click", handleFormSubmit);
-// $exampleList.on("click", ".delete", handleDeleteBtnClick);

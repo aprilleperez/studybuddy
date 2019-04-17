@@ -22,7 +22,7 @@ module.exports = function (app) {
   app.get("/api/getMatches", function (req, res) {
     db.Example.findMatches(res.user).then(function (dbExamples) {
       res.json(dbExamples);
-    // });
+     });
   });
 
 
@@ -62,22 +62,13 @@ module.exports = function (app) {
   // otherwise send back an error
   app.post("/api/signup", function (req, res) {
     console.log(req.body);
-    db.User.create({
-      email: req.body.email,
-      password: req.body.password
-    }).then(function () {
-      res.redirect(307, "/api/login");
+    db.Users.create(req.body).then(function () {
+      res.sendStatus(200);
     }).catch(function (err) {
       console.log(err);
       res.json(err);
       // res.status(422).json(err.errors[0].message);
     });
-  });
-
-  // Route for logging user out
-  app.get("/logout", function (req, res) {
-    req.logout();
-    res.redirect("/");
   });
 
   // Route for getting some data about our user to be used client side
@@ -97,4 +88,4 @@ module.exports = function (app) {
   });
 
 
-})};
+};
