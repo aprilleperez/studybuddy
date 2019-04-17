@@ -108,7 +108,7 @@ $("#submitButton").on("click", function () { // submit button on survey modal
   event.preventDefault();
   $('#modal2').modal({ backdrop: 'static', keyboard: false })
   $('#modal1').modal('hide');
-  // grabs user input and converts to corrosponding variable
+  // grabs user input and converts to coorosponding variable
   var topicQuestion1 = $("#topicQuestion").val();
   var subQuestion1 = $("#subQuestion").val();
   var remoteQuestion1 = $("#remoteQuestion").val();

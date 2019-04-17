@@ -6,10 +6,6 @@ var db = require("../models");
 var passport = require("../config/passport");
 
 module.exports = function (app) {
-  //  modal 1 user information on click is sent to DB Table 1: User Info (create account)
-  // TODO: code once Passport is installed and configured
-
-
   // modal 2 user survey results on click are sent to Table 2: User Search in DB (new or additional) (survey). TODO: update db.Example per handlebars specifications
   app.post("/api/submitSurvey", function (req, res) {
     db.Example.createSurvey(req.body).then(function (dbExample) {
