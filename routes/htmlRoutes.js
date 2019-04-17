@@ -26,68 +26,18 @@ module.exports = function(app) {
 // user is taken to User Search (results/matches) page /user/matches TODO: update findAll to use algorithm.js.Update examples:dbExamples to handlebars properties 
   app.get("/user/matches", isAuthenticated, function(req, res) {
     //get the data and put it in an object
+    db.Users.findAll({ }).then(function(dbExample) {
+      res.render("matchpage", {matches: dbExample});
+    });
 
-    // example data is dummy people to test hbs card generation. TODO: We need real data.
-    exampleData = {
-      matches: [
-        {
-          //example person 1
-          username: "Samsmith",
-          first_name: "Sam",
-          last_name: "Smith",
-          email: "sam@mail.com",
-          location: 98101,
-          id: 1,
-          photo: "https://slidesjs.com/examples/standard/img/example-slide-1.jpg"
-        },
-        {
-          // example person 4
-          username: "aprillep",
-          first_name: "Aprille",
-          last_name: "P",
-          email: "aprille@mail.com",
-          location: 98122,
-          id: 2,
-          photo: "https://slidesjs.com/examples/standard/img/example-slide-1.jpg"
-        }
-      ]
-    }
     // exampleData below is dummy data that is being passed thru. Need real data
-    res.render("matchpage", /*your data here*/exampleData);
-      
+    // res.render("matchpage", /*your data here*/exampleData);
   });
 
 
 // favorites route, user clicks on favorites from nav bar and is taken to favorites page.  TODO: update findFavorites to use sequelize.Update examples:dbExamples to handlebars properties 
 app.get("/user/buddylist", isAuthenticated,  function(req, res) {
   db.Users.findAll({ }).then(function(dbExample) {
-  // examplse data is dummy people to test hbs card generation. TODO: We need real data.
-  // exampleData = {
-  //     favorites: [
-  //       {
-  //         //example person 1
-  //         username: "Samsmith",
-  //         first_name: "Sam",
-  //         last_name: "Smith",
-  //         email: "sam@mail.com",
-  //         location: 98101,
-  //         id: 1,
-  //         photo: "https://slidesjs.com/examples/standard/img/example-slide-1.jpg"
-  //       },
-  //       {
-  //         // example person 4
-  //         username: "aprillep",
-  //         first_name: "Aprille",
-  //         last_name: "P",
-  //         email: "aprille@mail.com",
-  //         location: 98122,
-  //         id: 2,
-  //         photo: "https://slidesjs.com/examples/standard/img/example-slide-1.jpg"
-  //       }
-  //     ]
-  //   }
-    
-    
     res.render("buddylist", {favorites: dbExample});
     });
   });
@@ -104,3 +54,33 @@ app.get("/user/buddylist", isAuthenticated,  function(req, res) {
   });
 };
 
+
+
+
+
+
+    // example data is dummy people to test hbs card generation. TODO: We need real data.
+    // exampleData = {
+    //   matches: [
+    //     {
+    //       //example person 1
+    //       username: "Samsmith",
+    //       first_name: "Sam",
+    //       last_name: "Smith",
+    //       email: "sam@mail.com",
+    //       location: 98101,
+    //       id: 1,
+    //       photo: "https://slidesjs.com/examples/standard/img/example-slide-1.jpg"
+    //     },
+    //     {
+    //       // example person 4
+    //       username: "aprillep",
+    //       first_name: "Aprille",
+    //       last_name: "P",
+    //       email: "aprille@mail.com",
+    //       location: 98122,
+    //       id: 2,
+    //       photo: "https://slidesjs.com/examples/standard/img/example-slide-1.jpg"
+    //     }
+    //   ]
+    // }
