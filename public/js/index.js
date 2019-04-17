@@ -3,10 +3,8 @@
 /////////////////////////////////////////////////////////////////
 
 function loginAction() {
-  // NEED THESE VARS TO PASS THROUGH AUTHENTICATION
   var userEmail = $("#userEmail").val().trim(); // grab user input for username
   var password = $("#password").val().trim(); // grab user input for password
-  //alert(userEmail + password);
 
   $.post("/api/login", {
     email: userEmail,
@@ -17,11 +15,14 @@ function loginAction() {
   }).catch(function (err) {
     console.log(err);
   });
+};
 
+function handleLoginErr(err) {
+  $("#alert .msg").text(err.responseJSON);
+  $("#alert").fadeIn(500);
 };
 
 function createAccount() {
-  // NEED THESE VARS TO STORE INTO DB
   // Capture values from form field
   var newFirstname = $("#createFirstname").val().trim(); // grab user input for first name
   var newLastname = $("#createLastname").val().trim(); // grab user input for last name
@@ -32,8 +33,7 @@ function createAccount() {
   var cloudPhoto = $("#cloudUrl").val().trim();//grab url from hidden value that was stored with cloudinary response url
   console.log("cloudUrl is this:", cloudPhoto);
 
-  // TODO: pass values as object to apiRoutes.js
-  // store captured values into newUser object NEED TO FIX
+  // store captured values into newUser object to send to DB
   var newUser = {
     username: newUsername,
     password: newPassword,
@@ -84,10 +84,6 @@ $("#about-link").click(function (event) {
     scrollTop: $("#about").offset().top
   }, "slow");
 });
-function handleLoginErr(err) {
-  $("#alert .msg").text(err.responseJSON);
-  $("#alert").fadeIn(500);
-}
 
 
 // when user CLICKS LOGIN navlink
@@ -233,6 +229,7 @@ $(document).ready(function () {
 
 // when user CLICKS FAVORITE STAR button
 $(".favoriteButton").click(function (event) { // when favorite button (class) is clicked
+  alert("this was clicked");
   $.ajax(
     "/api/updateFavorite", {
       type: "put",

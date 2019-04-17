@@ -11,17 +11,49 @@ module.exports = function(app) {
   // root route: landing page. TODO: Hook in user authentication
   app.get("/", function(req, res) {
     if (req.user) {
-      return res.redirect("/user/matches");
+      // return res.redirect("/user/matches");
+      // authenticated = true;
+      res.render("index", {
+        authenticated:true
+      });
     }
     
-
-    res.render("index");
+    else{
+      res.render("index");
+    }
   });
 
 // user is taken to User Search (results/matches) page /user/matches TODO: update findAll to use algorithm.js.Update examples:dbExamples to handlebars properties 
   app.get("/user/matches", isAuthenticated, function(req, res) {
+    //get the data and put it in an object
 
-    res.render("matchpage");
+    // example data is dummy people to test hbs card generation. We need real data.
+    exampleData = {
+      matches: [
+        {
+          //example person 1
+          username: "Samsmith",
+          first_name: "Sam",
+          last_name: "Smith",
+          email: "sam@mail.com",
+          location: 98101,
+          id: 1,
+          photo: "https://slidesjs.com/examples/standard/img/example-slide-1.jpg"
+        },
+        {
+          // example person 4
+          username: "aprillep",
+          first_name: "Aprille",
+          last_name: "P",
+          email: "aprille@mail.com",
+          location: 98122,
+          id: 2,
+          photo: "https://slidesjs.com/examples/standard/img/example-slide-1.jpg"
+        }
+      ]
+    }
+    // exampleData below is dummy data that is being passed thru. Need real data
+    res.render("matchpage", /*your data here*/exampleData);
       
   });
 
