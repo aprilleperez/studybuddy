@@ -21,7 +21,7 @@ function handleLoginErr(err) {
   $("#alert .msg").text(err.responseJSON);
   $("#alert").fadeIn(500);
 };
-
+let newUserId;
 function createAccount() {
   // Capture values from form field
   var newFirstname = $("#createFirstname").val().trim(); // grab user input for first name
@@ -50,6 +50,8 @@ function createAccount() {
     if (data != 200) {
       // log/show error
     }
+    console.log('user creation data:', data);
+    newUserId=data.id;
     // If there's an error, handle it by throwing up a bootstrap alert
   }).catch(handleLoginErr);
 };
@@ -128,8 +130,20 @@ $("#submitButton").on("click", function () { // submit button on survey modal
   var topicQuestion1 = $("#topicQuestion").val();
   var subQuestion1 = $("#subQuestion").val();
   var remoteQuestion1 = $("#remoteQuestion").val();
+  if(remoteQuestion1==='Yes'){
+    remoteQuestion1= true;
+  }
+  else {
+    remoteQuestion1 = false;
+  }
   var inPerson1 = $("#inPerson").val();
-  var zipCode1 = $("#zipCode").val();
+  if(inPerson1==='Yes'){
+    inPerson1= true;
+  }
+  else {
+    inPerson1 = false;
+  }
+
   var timeQuestion1 = $("#timeQuestion").val();
   var daysOfWeek1 = [];
   // cycles through each check box and grabs the value if checked
@@ -141,19 +155,28 @@ $("#submitButton").on("click", function () { // submit button on survey modal
   var emailInput1 = $("#userEmail").val();
   var profilePictureInput1 = $("#userPictureInput").val();
 
+ // store captured values into newSurvey object to send to DB
+ var newSurvey = {
+  studytopic: topicQuestion1,
+  subtopic: subQuestion1,
+  preftime: timeQuestion1,
+  prefday: daysOfWeek1.join(", "),
+  meetvirtual: remoteQuestion1,
+  meetIP: inPerson1,
+  createdAt: new Date(),
+  updatedAt: new Date(),
+  UserId:newUserId
+}
 
-  console.log(topicQuestion1)
-  console.log(subQuestion1)
-  console.log(remoteQuestion1)
-  console.log(inPerson1)
-  console.log(zipCode1)
-  console.log(timeQuestion1)
-  console.log(daysOfWeek1)
-  console.log(usernameInput1)
-  console.log(passwordInput1)
-  console.log(emailInput1)
-  console.log(profilePictureInput1)
-
+$.post("/api/submitSurvey", newSurvey).then(function (data) {
+  console.log(data);
+  if (data != 200) {
+    // log/show error
+    console.log("this is the conlog", $(this))
+  }
+  // If there's an error, handle it by throwing up a bootstrap alert
+})
+  
 });
 
 
