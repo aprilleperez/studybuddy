@@ -27,7 +27,7 @@ module.exports = function(app) {
   app.get("/user/matches", isAuthenticated, function(req, res) {
     //get the data and put it in an object
 
-    // example data is dummy people to test hbs card generation. We need real data.
+    // example data is dummy people to test hbs card generation. TODO: We need real data.
     exampleData = {
       matches: [
         {
@@ -60,8 +60,35 @@ module.exports = function(app) {
 
 // favorites route, user clicks on favorites from nav bar and is taken to favorites page.  TODO: update findFavorites to use sequelize.Update examples:dbExamples to handlebars properties 
 app.get("/user/buddylist", isAuthenticated,  function(req, res) {
-  db.Example.findFavorites({ where: { id: req.params.id } }).then(function(dbExample) {
-    res.render("buddylist");
+  db.Users.findAll({ }).then(function(dbExample) {
+  // examplse data is dummy people to test hbs card generation. TODO: We need real data.
+  // exampleData = {
+  //     favorites: [
+  //       {
+  //         //example person 1
+  //         username: "Samsmith",
+  //         first_name: "Sam",
+  //         last_name: "Smith",
+  //         email: "sam@mail.com",
+  //         location: 98101,
+  //         id: 1,
+  //         photo: "https://slidesjs.com/examples/standard/img/example-slide-1.jpg"
+  //       },
+  //       {
+  //         // example person 4
+  //         username: "aprillep",
+  //         first_name: "Aprille",
+  //         last_name: "P",
+  //         email: "aprille@mail.com",
+  //         location: 98122,
+  //         id: 2,
+  //         photo: "https://slidesjs.com/examples/standard/img/example-slide-1.jpg"
+  //       }
+  //     ]
+  //   }
+    
+    
+    res.render("buddylist", {favorites: dbExample});
     });
   });
 
