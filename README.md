@@ -34,16 +34,25 @@ The user has the ability to log out, as well as to view an About page with furth
 * Workbench
 
 ## Authors:
-Aprille Perez
-Michael Albanez
-Will ___
-Claire Gibeau
+* Michael Albanez
+* Aprille Perez
+* Will Wilkens
+* Claire Gibeau
 
 ## Feedback:
-TODO:FILL IN
+This was our groups first time working with many of the components used. We had a learning curve on many of the technologies in making Study Buddy, and working as a group was both helpful (people to talk to when you have questions!) and sometimes not as helpful (merge conflicts on GitHub, we’re looking at you!). Three particularly challenging potions of the project included using Sequlize, Passport, and Cloudinary. Each presented unique challenges. 
+
+Sequlize was a brand new tool for each of us, so integrating it was very thought-provoking as we didn’t have much context or experience. We were tempted to stick with what we knew going into the project (MySQL) but pushed ourselves to use Sequlize. We learned a lot, but a few more days of experience would have been helpful in using this tool. 
+Passport.js was a great for user authentication. Integrating it into the project was interesting as we hadn’t ever used it before, so we were leaning on our experience from other .js library integrations and the documentation to make it work. User authentication is working, so that’s a win!
+
+Cloudinary is a SaaS component that was used for capturing user images. It stopped working at one point so we spent a lot of time reviewing the code to see what was wrong, only to learn that it was an issue with our Cloudinary account vs. and issue with our code. This too is working; win/win!
+
+Our team did a great job planning this project and understanding what the MVP was. We challenged ourselves to use new tools and supported each other through the learning process resulting in an app we are all proud of; Study Buddy. 
+
 
 ## GitHub Link:
 https://github.com/aprilleperez/studybuddy
 
 ## Heroku Link: 
-TODO:FILL IN
+https://your-study-buddy.herokuapp.com/
+
