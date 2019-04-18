@@ -5,7 +5,7 @@ var surveySeeds = [{
     studytopic: 'math',
     subtopic: 'algebra',
     preftime: 'morning',
-    prefday: 'mon',
+    prefday: 'Monday',
     meetvirtual: 0,
     meetIP: 0,
     username: 'JDoe',
@@ -17,7 +17,7 @@ var surveySeeds = [{
     studytopic: 'math',
     subtopic: 'calculus',
     preftime: 'morning',
-    prefday: 'tues',
+    prefday: 'Tuesday',
     meetvirtual: 0,
     meetIP: 0,
     username: 'JJones',
@@ -29,7 +29,7 @@ var surveySeeds = [{
     studytopic: 'math',
     subtopic: 'geometry',
     preftime: 'evening',
-    prefday: 'fri',
+    prefday: 'Friday',
     meetvirtual: 0,
     meetIP: 1,
     username: 'ASmith',
@@ -41,7 +41,7 @@ var surveySeeds = [{
     studytopic: 'math',
     subtopic: 'numtheory',
     preftime: 'afternoon',
-    prefday: 'sun',
+    prefday: 'sunday',
     meetvirtual: 0,
     meetIP: 1,
     username: 'FThompson',
@@ -53,7 +53,7 @@ var surveySeeds = [{
     studytopic: 'math',
     subtopic: 'diffeq',
     preftime: 'afternoon',
-    prefday: 'sat',
+    prefday: 'saturday',
     meetvirtual: 0,
     meetIP: 1,
     username: 'TWilliams',
@@ -65,7 +65,7 @@ var surveySeeds = [{
     studytopic: 'math',
     subtopic: 'diffeq',
     preftime: 'morning',
-    prefday: 'sat',
+    prefday: 'saturday',
     meetvirtual: 0,
     meetIP: 0,
     username: 'LAndrews',
@@ -75,10 +75,17 @@ var surveySeeds = [{
 }
 ];
 
+//this code checks the DB to see if there is already content (seeds)
+//if no content, add seeds. 
+//if there is content, do not add seeds.
 function seedSurveys() {
-    surveySeeds.forEach(function (user) {
-        db.Survey.create(user);
-    })
+    db.Survey.count().then(c => { 
+        if (c == 0) {
+            surveySeeds.forEach(function (user) {
+                db.Survey.create(user);
+            })
+        }
+    });
 }
 
 module.exports = seedSurveys
