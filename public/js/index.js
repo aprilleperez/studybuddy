@@ -34,7 +34,8 @@ function createAccount() {
   console.log("cloudUrl is this:", cloudPhoto);
 
   if (!cloudPhoto) {
-    // TODO: Add stock photo for cloudPhoto
+    //stock photo for cloudPhoto
+    cloudPhoto = "http://www.crmasiasolutions.com/files/images/cloud-software-450.jpg";
   }
 
   // store captured values into newUser object to send to DB
@@ -161,10 +162,10 @@ $("#submitButton").on("click", function () { // submit button on survey modal
 
   // store captured values into newSurvey object to send to DB
   var newSurvey = {
-    studytopic: topicQuestion1,
-    subtopic: subQuestion1,
-    preftime: timeQuestion1,
-    prefday: daysOfWeek1.join(", "),
+    studytopic: topicQuestion1.toLowerCase(),
+    subtopic: subQuestion1.toLowerCase(),
+    preftime: timeQuestion1.toLowerCase(),
+    prefday: daysOfWeek1.map(str => str.toLowerCase()).join(", "),
     meetvirtual: remoteQuestion1,
     meetIP: inPerson1,
     createdAt: new Date(),
@@ -183,7 +184,8 @@ $("#submitButton").on("click", function () { // submit button on survey modal
 
 });
 
-
+// TODO: The below options don't map to the seeded data (see seedSurvey.js)
+// TODO: Look at line 199, we could map the values
 // when TOPICS are TOGGLED
 $(document).ready(function () {
   $("#topicQuestion").change(function () {
@@ -194,7 +196,7 @@ $(document).ready(function () {
       $("#subQuestion").append("   <option>Calculus</option>")
       $("#subQuestion").append("   <option>Geometry</option>")
       $("#subQuestion").append("   <option>Number Theory</option>")
-      $("#subQuestion").append("   <option>Differential Equations</option>")
+      $("#subQuestion").append("   <option value='diffeq'>Differential Equations</option>")
     } else if ($(this)[0].value === "Science") {
       $("#subQuestion").empty();
       $("#subQuestion").append("   <option>Physics</option>")
