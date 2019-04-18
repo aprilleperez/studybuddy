@@ -33,6 +33,10 @@ function createAccount() {
   var cloudPhoto = $("#cloudUrl").val().trim();//grab url from hidden value that was stored with cloudinary response url
   console.log("cloudUrl is this:", cloudPhoto);
 
+  if (!cloudPhoto) {
+    // TODO: Add stock photo for cloudPhoto
+  }
+
   // store captured values into newUser object to send to DB
   var newUser = {
     username: newUsername,

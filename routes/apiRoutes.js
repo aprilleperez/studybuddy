@@ -52,7 +52,7 @@ module.exports = function (app) {
     db.Users.findAll({ where: { id: req.user.id } }).then(userthing => {
       userthing[0].addFriend(req.body.id);
       res.json(userthing[0])
-    })
+    });
     // db.favorite.create(req.body).then(function (dbFavorites) {
     //   res.json(dbFavorites);
     // });

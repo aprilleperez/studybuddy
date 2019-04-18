@@ -26,9 +26,25 @@ module.exports = function (app) {
   // user is taken to User Search (results/matches) page /user/matches TODO: update findAll to use algorithm.js.Update examples:dbExamples to handlebars properties 
   app.get("/user/matches", isAuthenticated, function (req, res) {
     //get the data and put it in an object
-    db.Users.findAll({}).then(function (dbExample) {
-      res.render("matchpage", { matches: dbExample });
-    });
+//     db.Users.findAll({}).then(function (dbExample) {
+//       res.render("matchpage", { matches: dbExample });
+//     });
+
+    // example data is dummy people to test hbs card generation. TODO: We need real data.
+    db.Survey.findOne({
+      where: {UserId: req.user.id}
+    }).then(function(survey){
+      return db.Survey.findAll({
+        where: {subtopic: survey.subtopic},
+        include:[{model: db.Users}]
+      })
+    }).then(function (surveys){
+      matches = surveys.map(s => s.User.dataValues)
+      res.render("matchpage", /*your data here*/{matches: matches});
+      //res.json(surveys);
+      //console.log("step 2", surveys)
+      return
+    })
   });
 
 
@@ -41,9 +57,7 @@ module.exports = function (app) {
       })
     });
   });
-
-
-
+  
   // Route for logging user out
   app.get("/logout", function (req, res) {
     req.logout();
@@ -55,10 +69,6 @@ module.exports = function (app) {
     res.render("404");
   });
 };
-
-
-
-
 
 
     // example data is dummy people to test hbs card generation. TODO: We need real data.
