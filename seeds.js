@@ -68,10 +68,18 @@ var userSeeds = [{
 }
 ];
 
+
+//this code checks the DB to see if there is already content (seeds)
+//if no content, add seeds. 
+//if there is content, do not add seeds.
 function seed() {
-    userSeeds.forEach(function (user) {
-        db.Users.create(user);
-    })
+    db.Users.count().then(c => {
+        if (c == 0) {
+            userSeeds.forEach(function (user) {
+                db.Users.create(user);
+            })
+        }
+    });
 };
 
 module.exports = seed;
