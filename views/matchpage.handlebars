@@ -42,13 +42,14 @@
     {{!-- NEED A #EACH to render these cards, delete dummy code after first one --}}
     <div class="topMatches">
         {{#each matches}}
+        {{!-- bestMatches --}}
         <div class="card matchCard" style="width: 18rem;">
             <img src="{{this.photo}}" class="card-img-top" alt="Match Photo">
 
             <i data-id="{{this.id}}" id="favorite" class="favoriteButton far fa-star"></i>
 
             <div class="card-body cardInfo">
-                <p class="card-text">{{this.first_name}} {{this.last_name}}</p>
+                <p class="card-text cardName"><strong>{{this.first_name}} {{this.last_name}}</strong></p>
                 <p class="card-text">Username: {{this.username}}</p>
                 <p class="card-text"><a href="mailto:{{this.email}}">Email: {{this.email}}</a></p>
                 <p class="card-text">Located: {{this.location}}</p>
@@ -70,6 +71,7 @@
 
     <div class="moreMatches">
         {{#each matches}}
+        {{!-- additionalMatches --}}
         <div class="card matchCard" style="width: 18rem;">
             <img src="{{this.photo}}" class="card-img-top" alt="Match Photo">
 

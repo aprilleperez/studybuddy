@@ -1,3 +1,7 @@
+/* ---------------------------------------- */
+/* Global                                   */
+/* ---------------------------------------- */
+
 body {
   font-family: 'Source Sans Pro', sans-serif;
   /* background: rgb(43,12,255);
@@ -8,9 +12,11 @@ body {
   line-height: 2.5;
 }
 
-/* .container {
-  background-color: yellow;
-} */
+
+
+/* ---------------------------------------- */
+/* Navbar                                   */
+/* ---------------------------------------- */
 
 .cstmNavBar {
   background-color: rgba(255, 255, 255, 0);
@@ -20,7 +26,12 @@ body {
   color: orange;
 }
 
-/* LANDING PAGE */
+
+
+/* ---------------------------------------- */
+/* Landing Page                             */
+/* ---------------------------------------- */
+
 .landingJumbo {
   /* background: rgb(43,12,255);
   background: linear-gradient(345deg, rgba(43,12,255,1) 0%, rgba(0,255,234,1) 85%); */
@@ -55,21 +66,7 @@ body {
   background-color: #6d3939;
 }
 
-.modalButtons {
-  color: #6d3939;
-  border-radius: 0px;
-  border-color: #6d3939;
-  background-color: white;
-}
-
-.modalButtons:hover {
-  color: white;
-  border-color: #6d3939;
-  background-color: #6d3939;
-}
-
 .loginMsg {
-  /* background-color: aqua; */
   display: flex;
   justify-content: center;
 }
@@ -79,10 +76,39 @@ body {
 }
 
 
-/* MATCH PAGE */
+
+/* ---------------------------------------- */
+/* Modals                                   */
+/* ---------------------------------------- */
+
+.modalButtons {
+  color: #6d3939;
+  border-radius: 0px;
+  border-color: #6d3939;
+  background-color: white;
+  width: 150px;
+}
+
+.modalButtons:hover {
+  color: white;
+  border-color: #6d3939;
+  background-color: #6d3939;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: center;
+}
+
+
+
+/* ---------------------------------------- */
+/* Match Page                               */
+/* ---------------------------------------- */
+
 .matchContainer {
-  background: rgb(200,230,245);
-  background: linear-gradient(345deg, rgba(200,230,245,1) 0%, rgba(92,160,211,1) 80%);
+  /* background: rgb(200,230,245);
+  background: linear-gradient(345deg, rgba(200,230,245,1) 0%, rgba(92,160,211,1) 80%); */
   /* margin-top: 20px; */
   margin-bottom: 20px;
   padding-top: 20px;
@@ -97,11 +123,22 @@ body {
 }
 
 .matchCard {
-  margin: 10px;
+  margin: 20px;
+  border-radius: 0px;
+  border-style: solid;
+}
+
+.card-img-top {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+.cardName {
+  color: #6d3939;
 }
 
 #favorite {
-  color: blue;
+  color: #f2eee0;
   /* float: right; */
   position: absolute;
   top: 15px;
@@ -110,7 +147,13 @@ body {
 }
 
 
-/* BUDDYLIST PAGE */
+
+
+
+/* ---------------------------------------- */
+/* Favorites Page                           */
+/* ---------------------------------------- */
+
 .favesContainer {
   background: rgb(200,230,245);
   background: linear-gradient(345deg, rgba(200,230,245,1) 0%, rgba(92,160,211,1) 80%);
@@ -118,4 +161,6 @@ body {
   margin-bottom: 20px;
   padding-top: 20px;
   padding-bottom: 20px;
+  height: 100vh;
+  overflow: auto;
 }
