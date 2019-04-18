@@ -26,9 +26,9 @@ module.exports = function (app) {
   // user is taken to User Search (results/matches) page /user/matches TODO: update findAll to use algorithm.js.Update examples:dbExamples to handlebars properties 
   app.get("/user/matches", isAuthenticated, function (req, res) {
     //get the data and put it in an object
-    db.Users.findAll({}).then(function (dbExample) {
-      res.render("matchpage", { matches: dbExample });
-    });
+//     db.Users.findAll({}).then(function (dbExample) {
+//       res.render("matchpage", { matches: dbExample });
+//     });
 
     // example data is dummy people to test hbs card generation. TODO: We need real data.
     db.Survey.findOne({
