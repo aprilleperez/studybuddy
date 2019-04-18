@@ -269,8 +269,8 @@ $(".favoriteButton").click(function (event) { // when favorite button (class) is
     })
 });
 
-$('#popoverData').popover();
-// $('#popoverOption').popover({ trigger: "hover" });
+// when user HOVERS FAVORITE STAR button
+$('.favoriteButton').popover();
 
 
 

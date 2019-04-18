@@ -49,11 +49,14 @@ body {
   margin-bottom: 10px;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .landingButtons {
   margin-left: 20px;
   margin-right: 20px;
+  /* margin-top: 10px; */
+  margin-bottom: 10px;
   width: 250px;
   color: #6d3939;
   border-radius: 0px;
@@ -73,6 +76,14 @@ body {
 
 .aboutSection {
   height: 100vh;
+}
+
+.aboutHeader {
+  margin-top: 75px;
+}
+
+.aboutBody {
+  margin-top: 50px;
 }
 
 
@@ -126,6 +137,7 @@ body {
   margin: 20px;
   border-radius: 0px;
   border-style: solid;
+  border-color: #6d3939;
 }
 
 .card-img-top {
@@ -138,15 +150,11 @@ body {
 }
 
 #favorite {
-  color: #f2eee0;
-  /* float: right; */
+  color: #6d3939;
   position: absolute;
   top: 15px;
   right: 15px;
-  /* font-size: 15px; */
 }
-
-
 
 
 
@@ -155,10 +163,12 @@ body {
 /* ---------------------------------------- */
 
 .favesContainer {
-  background: rgb(200,230,245);
-  background: linear-gradient(345deg, rgba(200,230,245,1) 0%, rgba(92,160,211,1) 80%);
+  /* background: rgb(200,230,245);
+  background: linear-gradient(345deg, rgba(200,230,245,1) 0%, rgba(92,160,211,1) 80%); */
   /* margin-top: 20px; */
-  margin-bottom: 20px;
+  background: rgb(255,255,255);
+  background: linear-gradient(180deg, rgba(255,255,255,0.4640231092436975) 0%, rgba(248,249,250,1) 100%);
+  /* margin-bottom: 20px; */
   padding-top: 20px;
   padding-bottom: 20px;
   height: 100vh;
