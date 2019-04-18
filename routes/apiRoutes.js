@@ -49,8 +49,8 @@ module.exports = function (app) {
 
   // user clicks to favorite a profile and this information is sent to Table 3: Favorites in DB (favorites). TODO: update db.Example per handlebars specifications to pass in clicked favorite user by favUserID AND if a favorite, pass true, else false for res.isFav. This will allow the user to both favorite and un-favorite other users. (GET or POST here??  I think POST)
   app.post("/api/updateFavorite", function (req, res) {
-    db.Users.findAll({where:{id:req.user.id}}).then(userthing=>{
-    userthing[0].addFriend(req.body.id);
+    db.Users.findAll({ where: { id: req.user.id } }).then(userthing => {
+      userthing[0].addFriend(req.body.id);
       res.json(userthing[0])
     });
     // db.favorite.create(req.body).then(function (dbFavorites) {
