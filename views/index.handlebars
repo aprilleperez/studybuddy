@@ -1,5 +1,5 @@
 {{!-- NAVBAR --}}
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light cstmNavBar">
   <a class="navbar-brand" href="/">Study Buddy</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
     aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -8,24 +8,24 @@
   <div class="collapse navbar-collapse" id="navbarText">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" id="about-link" href="/#about">About <span class="sr-only">(current)</span></a>
+        <a class="nav-link cstmNavLink" id="about-link" href="/#about">About <span class="sr-only">(current)</span></a>
       </li>
       {{#unless authenticated}}
       {{!-- ^^ not authenticated (falsey value) --}}
       <li class="nav-item">
-        <a class="nav-link" href="#login-modal" data-toggle="modal" data-target="#login-modal">Login</a>
+        <a class="nav-link cstmNavLink" href="#login-modal" data-toggle="modal" data-target="#login-modal">Login</a>
       </li>
       {{/unless}}
       {{#if authenticated}}
       {{!-- if authenticated (true) --}}
       <li class="nav-item">
-        <a class="nav-link" href="/user/matches">Matches</a>
+        <a class="nav-link cstmNavLink" href="/user/matches">Matches</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link active" href="/user/buddylist">Favorites</a>
+        <a class="nav-link cstmNavLink" href="/user/buddylist">Favorites</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/logout">Logout</a>
+        <a class="nav-link cstmNavLink" href="/logout">Logout</a>
       </li>
       {{/if}}
     </ul>
@@ -36,11 +36,12 @@
 {{!-- LANDING CONTENT --}}
 <div class="jumbotron landingJumbo">
   {{#unless authenticated}}
-  <h5 class="text-center">Want help from other students?</h5>
+  <h4 class="text-center">Want help from other students?</h4>
+  <br>
   <h1 class="text-center">Find a buddy to study the same subject as you!</h1>
 
   <div class="landingCTA">
-    <button type="button" class="btn btn-outline-primary signup-button" data-toggle="modal" data-target="#modal1">Sign
+    <button type="button" class="btn btn-outline-primary signup-button landingButtons" data-toggle="modal" data-target="#modal1">Sign
       Up</button>
     <br>
   </div>
@@ -52,15 +53,14 @@
   {{#if authenticated}}
   {{!-- if authenticated (true) --}}
   <h1 class="text-center">Welcome to Study Buddy</h1>
-  <h5 class="text-center">View your previous matches, check out your saved buddies, or start a new survey!</h5>
+  <br>
+  <h4 class="text-center">View your previous matches, check out your saved buddies, or start a new survey!</h4>
 
   <div class="landingCTA">
-    <a href="/user/matches"><button type="button" class="btn btn-outline-primary matches-button">Matches</button></a>
-    <br>
+    <a href="/user/matches"><button type="button" class="btn btn-outline-primary matches-button landingButtons">Matches</button></a>
     <a href="/user/buddylist"><button type="button"
-        class="btn btn-outline-primary buddylist-button">Favorites</button></a>
-    <br>
-    <button type="button" class="btn btn-outline-primary survey-button" data-toggle="modal" data-target="#modal2">Take
+        class="btn btn-outline-primary buddylist-button landingButtons">Favorites</button></a>
+    <button type="button" class="btn btn-outline-primary survey-button landingButtons" data-toggle="modal" data-target="#modal2">Take
       Survey</button>
   </div>
   {{/if}}
@@ -118,7 +118,7 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary create-button" id="createAccount-button" data-toggle="modal"
+        <button type="button" class="btn btn-primary create-button modalButtons" id="createAccount-button" data-toggle="modal"
           data-target="#modal2" data-dismiss="modal">Create</button>
       </div>
     </div>
@@ -262,7 +262,7 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary create-button" id="submitButton" data-toggle="modal"
+        <button type="button" class="btn btn-primary create-button modalButtons" id="submitButton" data-toggle="modal"
           data-target="#modal2">Submit</button>
       </div>
     </div>
@@ -292,7 +292,7 @@
             <input type="password" class="form-control" id="password">
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary create-button" id="login-button"
+            <button type="button" class="btn btn-primary create-button modalButtons" id="login-button"
               data-toggle="modal">Login</button>
           </div>
         </form>
