@@ -7,91 +7,60 @@ var isAuthenticated = require("../config/middleware/isAuthenticated");
 
 // var fakeArray = [{id:1, text:'someText'}, {id:1, text:'Some other burger text'}];
 
-module.exports = function(app) {
+module.exports = function (app) {
   // root route: landing page. TODO: Hook in user authentication
-  app.get("/", function(req, res) {
+  app.get("/", function (req, res) {
     if (req.user) {
       // return res.redirect("/user/matches");
       // authenticated = true;
       res.render("index", {
-        authenticated:true
+        authenticated: true
       });
     }
-    
-    else{
+
+    else {
       res.render("index");
     }
   });
 
-// user is taken to User Search (results/matches) page /user/matches TODO: update findAll to use algorithm.js.Update examples:dbExamples to handlebars properties 
-  app.get("/user/matches", isAuthenticated, function(req, res) {
+  // user is taken to User Search (results/matches) page /user/matches TODO: update findAll to use algorithm.js.Update examples:dbExamples to handlebars properties 
+  app.get("/user/matches", isAuthenticated, function (req, res) {
     //get the data and put it in an object
+    db.Users.findAll({}).then(function (dbExample) {
+      res.render("matchpage", { matches: dbExample });
+    });
 
     // example data is dummy people to test hbs card generation. TODO: We need real data.
-    exampleData = {
-      matches: [
-        {
-          //example person 1
-          username: "Samsmith",
-          first_name: "Sam",
-          last_name: "Smith",
-          email: "sam@mail.com",
-          location: 98101,
-          id: 1,
-          photo: "https://slidesjs.com/examples/standard/img/example-slide-1.jpg"
-        },
-        {
-          // example person 4
-          username: "aprillep",
-          first_name: "Aprille",
-          last_name: "P",
-          email: "aprille@mail.com",
-          location: 98122,
-          id: 2,
-          photo: "https://slidesjs.com/examples/standard/img/example-slide-1.jpg"
-        }
-      ]
-    }
-    // exampleData below is dummy data that is being passed thru. Need real data
-    res.render("matchpage", /*your data here*/exampleData);
+    db.Survey.findOne({
+      where: {UserId: req.user.id}
+    }).then(function(survey){
+      return db.Survey.findAll({
+        where: {subtopic: survey.subtopic},
+        include:[{model: db.Users}]
+      })
+    }).then(function (surveys){
+      matches = surveys.map(s => s.User.dataValues)
+      res.render("matchpage", /*your data here*/{matches: matches});
+      //res.json(surveys);
+      //console.log("step 2", surveys)
+      return
+    })
       
   });
 
 
-// favorites route, user clicks on favorites from nav bar and is taken to favorites page.  TODO: update findFavorites to use sequelize.Update examples:dbExamples to handlebars properties 
-app.get("/user/buddylist", isAuthenticated,  function(req, res) {
-  // db.Example.findFavorites({ where: { id: req.params.id } }).then(function(dbExample) {
-    
-  // example data is dummy people to test hbs card generation. TODO: We need real data.
-  exampleData = {
-      favorites: [
-        {
-          //example person 1
-          username: "Samsmith",
-          first_name: "Sam",
-          last_name: "Smith",
-          email: "sam@mail.com",
-          location: 98101,
-          id: 1,
-          photo: "https://slidesjs.com/examples/standard/img/example-slide-1.jpg"
-        },
-        {
-          // example person 4
-          username: "aprillep",
-          first_name: "Aprille",
-          last_name: "P",
-          email: "aprille@mail.com",
-          location: 98122,
-          id: 2,
-          photo: "https://slidesjs.com/examples/standard/img/example-slide-1.jpg"
-        }
-      ]
-    }
-    
-    
-    res.render("buddylist", exampleData);
-    // });
+  // favorites route, user clicks on favorites from nav bar and is taken to favorites page.  TODO: update findFavorites to use sequelize.Update examples:dbExamples to handlebars properties 
+  app.get("/user/buddylist", isAuthenticated, function (req, res) {
+    db.Users.findAll({ where: { id:req.user.id } }).then(function (dbExample) {
+      // res.render("buddylist", { favorites: dbExample });
+      dbExample[0].getFriends().then(friends=>{
+        console.log(friends);
+        res.render('buddylist',{favorites:friends})
+      })
+    });
   });
+
+  
 
   // Route for logging user out
   app.get("/logout", function (req, res) {
@@ -99,9 +68,39 @@ app.get("/user/buddylist", isAuthenticated,  function(req, res) {
     res.redirect("/");
   });
 
-// Render 404 page for any unmatched routes
-  app.get("*", function(req, res) {
+  // Render 404 page for any unmatched routes
+  app.get("*", function (req, res) {
     res.render("404");
   });
 };
 
+
+// blahblah bablsjskjslkjflakfjlkj
+
+
+
+    // example data is dummy people to test hbs card generation. TODO: We need real data.
+    // exampleData = {
+    //   matches: [
+    //     {
+    //       //example person 1
+    //       username: "Samsmith",
+    //       first_name: "Sam",
+    //       last_name: "Smith",
+    //       email: "sam@mail.com",
+    //       location: 98101,
+    //       id: 1,
+    //       photo: "https://slidesjs.com/examples/standard/img/example-slide-1.jpg"
+    //     },
+    //     {
+    //       // example person 4
+    //       username: "aprillep",
+    //       first_name: "Aprille",
+    //       last_name: "P",
+    //       email: "aprille@mail.com",
+    //       location: 98122,
+    //       id: 2,
+    //       photo: "https://slidesjs.com/examples/standard/img/example-slide-1.jpg"
+    //     }
+    //   ]
+    // }
