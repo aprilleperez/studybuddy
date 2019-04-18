@@ -252,16 +252,15 @@ $(document).ready(function () {
 
 // when user CLICKS FAVORITE STAR button
 $(".favoriteButton").click(function (event) { // when favorite button (class) is clicked
-  // alert("this was clicked");
   $(this).removeClass("far fa-star");
   $(this).addClass("fas fa-star");
   console.log($(this).data("id"));
   $.ajax(
     "/api/updateFavorite", {
-      type: "post", // NEED TO FIX
+      type: "post",
       data: { id: $(this).data("id") } // targets specific button clicked with that ID
     }).then(function (data) {
-      location.reload();
+   
     })
 });
 
