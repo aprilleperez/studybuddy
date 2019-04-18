@@ -75,10 +75,17 @@ var surveySeeds = [{
 }
 ];
 
+//this code checks the DB to see if there is already content (seeds)
+//if no content, add seeds. 
+//if there is content, do not add seeds.
 function seedSurveys() {
-    surveySeeds.forEach(function (user) {
-        db.Survey.create(user);
-    })
+    db.Survey.count().then(c => { 
+        if (c == 0) {
+            surveySeeds.forEach(function (user) {
+                db.Survey.create(user);
+            })
+        }
+    });
 }
 
 module.exports = seedSurveys
