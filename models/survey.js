@@ -2,7 +2,7 @@ module.exports = function (sequelize, DataTypes) {
     var Survey = sequelize.define("Survey", {
         studytopic: {
             type: DataTypes.TEXT,
-            values: ["math", "science", "law", "coding", "english", "exsci", "eng", "business"]
+            values: ["math", "science", "law", "coding", "english", "exercise science", "engineering", "business"]
         },
         subtopic: DataTypes.STRING,
         preftime: {
@@ -11,7 +11,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         prefday: {
             type: DataTypes.TEXT,
-            values: ["sun", "mon", "tues", "wed", "thurs", "fri", "sat", "wkday", "wkend"]
+            values: ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "weekday", "weekend"]
         },
         meetvirtual: DataTypes.BOOLEAN,
         meetIP: DataTypes.BOOLEAN,
