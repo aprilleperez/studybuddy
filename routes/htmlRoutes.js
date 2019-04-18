@@ -7,27 +7,27 @@ var isAuthenticated = require("../config/middleware/isAuthenticated");
 
 // var fakeArray = [{id:1, text:'someText'}, {id:1, text:'Some other burger text'}];
 
-module.exports = function(app) {
+module.exports = function (app) {
   // root route: landing page. TODO: Hook in user authentication
-  app.get("/", function(req, res) {
+  app.get("/", function (req, res) {
     if (req.user) {
       // return res.redirect("/user/matches");
       // authenticated = true;
       res.render("index", {
-        authenticated:true
+        authenticated: true
       });
     }
-    
-    else{
+
+    else {
       res.render("index");
     }
   });
 
-// user is taken to User Search (results/matches) page /user/matches TODO: update findAll to use algorithm.js.Update examples:dbExamples to handlebars properties 
-  app.get("/user/matches", isAuthenticated, function(req, res) {
+  // user is taken to User Search (results/matches) page /user/matches TODO: update findAll to use algorithm.js.Update examples:dbExamples to handlebars properties 
+  app.get("/user/matches", isAuthenticated, function (req, res) {
     //get the data and put it in an object
-    db.Users.findAll({ }).then(function(dbExample) {
-      res.render("matchpage", {matches: dbExample});
+    db.Users.findAll({}).then(function (dbExample) {
+      res.render("matchpage", { matches: dbExample });
     });
 
     // exampleData below is dummy data that is being passed thru. Need real data
@@ -35,12 +35,18 @@ module.exports = function(app) {
   });
 
 
-// favorites route, user clicks on favorites from nav bar and is taken to favorites page.  TODO: update findFavorites to use sequelize.Update examples:dbExamples to handlebars properties 
-app.get("/user/buddylist", isAuthenticated,  function(req, res) {
-  db.Users.findAll({ }).then(function(dbExample) {
-    res.render("buddylist", {favorites: dbExample});
+  // favorites route, user clicks on favorites from nav bar and is taken to favorites page.  TODO: update findFavorites to use sequelize.Update examples:dbExamples to handlebars properties 
+  app.get("/user/buddylist", isAuthenticated, function (req, res) {
+    db.Users.findAll({ where: { id:req.user.id } }).then(function (dbExample) {
+      // res.render("buddylist", { favorites: dbExample });
+      dbExample[0].getFriends().then(friends=>{
+        console.log(friends);
+        res.render('buddylist',{favorites:friends})
+      })
     });
   });
+
+  
 
   // Route for logging user out
   app.get("/logout", function (req, res) {
@@ -48,8 +54,8 @@ app.get("/user/buddylist", isAuthenticated,  function(req, res) {
     res.redirect("/");
   });
 
-// Render 404 page for any unmatched routes
-  app.get("*", function(req, res) {
+  // Render 404 page for any unmatched routes
+  app.get("*", function (req, res) {
     res.render("404");
   });
 };

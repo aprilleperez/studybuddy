@@ -1,7 +1,6 @@
 // api routes show all back-end routes for accessing the DB and user authentication 
 
 var db = require("../models");
-
 // Requiring our models and passport as we've configured it
 var passport = require("../config/passport");
 
@@ -50,9 +49,13 @@ module.exports = function (app) {
 
   // user clicks to favorite a profile and this information is sent to Table 3: Favorites in DB (favorites). TODO: update db.Example per handlebars specifications to pass in clicked favorite user by favUserID AND if a favorite, pass true, else false for res.isFav. This will allow the user to both favorite and un-favorite other users. (GET or POST here??  I think POST)
   app.post("/api/updateFavorite", function (req, res) {
-    db.favorites.create(res.user, res.userId, res.favoriteId).then(function (dbfavorites) {
-      res.json(dbfavorites);
-    });
+    db.Users.findAll({ where: { id: req.user.id } }).then(userthing => {
+      userthing[0].addFriend(req.body.id);
+      res.json(userthing[0])
+    })
+    // db.favorite.create(req.body).then(function (dbFavorites) {
+    //   res.json(dbFavorites);
+    // });
   });
 
   // user clicks on favorites and is presented with a list of all of the people they have marked as favorites. TODO: update db.Example per handlebars specifications 
