@@ -41,7 +41,7 @@ var surveySeeds = [{
     studytopic: 'math',
     subtopic: 'numtheory',
     preftime: 'afternoon',
-    prefday: 'sunday',
+    prefday: 'Sunday',
     meetvirtual: 0,
     meetIP: 1,
     username: 'FThompson',
@@ -53,7 +53,7 @@ var surveySeeds = [{
     studytopic: 'math',
     subtopic: 'diffeq',
     preftime: 'afternoon',
-    prefday: 'saturday',
+    prefday: 'Saturday',
     meetvirtual: 0,
     meetIP: 1,
     username: 'TWilliams',
@@ -65,7 +65,7 @@ var surveySeeds = [{
     studytopic: 'math',
     subtopic: 'diffeq',
     preftime: 'morning',
-    prefday: 'saturday',
+    prefday: 'Saturday',
     meetvirtual: 0,
     meetIP: 0,
     username: 'LAndrews',
@@ -79,7 +79,7 @@ var surveySeeds = [{
 //if no content, add seeds. 
 //if there is content, do not add seeds.
 function seedSurveys() {
-    db.Survey.count().then(c => { 
+    db.Survey.count().then(c => {
         if (c == 0) {
             surveySeeds.forEach(function (user) {
                 db.Survey.create(user);
