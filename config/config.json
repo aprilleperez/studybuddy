@@ -1,14 +1,14 @@
 {
   "development": {
     "username": "root",
-    "password": "password",
+    "password": "PassWord123",
     "database": "studybuddy",
     "host": "localhost",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": "",
+    "password": "PassWord123",
     "database": "testdb",
     "host": "localhost",
     "dialect": "mysql",

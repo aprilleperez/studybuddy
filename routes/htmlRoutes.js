@@ -34,7 +34,7 @@ module.exports = function (app) {
       db.Users.findAll({
         where: { id: matchedUserIds }
       }).then(function (matches) {
-        return res.render("matchpage", /*your data here*/{ matches: matches });
+        return res.render("matchpage", /*your data here*/{bestMatches:bestMatches,  matches: matches });
       });
     });
 
