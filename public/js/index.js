@@ -277,13 +277,14 @@ $(".favoriteButton").click(function (event) { // when favorite button (class) is
 /////////////////////////////////////////////////////////////////
 // creates widget w/ relative name/preset keys
 var myWidget = cloudinary.createUploadWidget({
-  cloudName: 'bootcampbuddy',
-  uploadPreset: 'rnuetcvd'
+  cloudName: 'studybuddy123',
+  uploadPreset: 'yrwer6bi'
 }, (error, result) => {
   if (!error && result && result.event === "success") {
     // logs the results of sending image to cloudinary
     console.log('Done! Here is the image info: ', result.info.url);
     let pictureImage = result.info.url
+    console.log(result.info.url)
     // updates hidden input with response url
     $("#cloudUrl").val(pictureImage)
   }
