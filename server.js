@@ -7,6 +7,7 @@ var session = require("express-session");
 var passport = require("./config/passport");
 
 var db = require("./models");
+// console seeds out for heroku
 var Seeds = require("./seeds")
 var seedSurvey = require("./seedSurvey")
 
@@ -37,7 +38,7 @@ app.set("view engine", "handlebars");
 require("./routes/htmlRoutes")(app);
 require("./routes/apiRoutes")(app);
 
-var syncOptions = { force: true };
+var syncOptions = { force: false };
 
 // If running a test, set syncOptions.force to true
 // clearing the `testdb`
@@ -48,6 +49,7 @@ if (process.env.NODE_ENV === "test") {
 // Starting the server, syncing our models ------------------------------------/
 db.sequelize.sync(syncOptions)
   .then(function () {
+    // console next two lines out for heroku
     console.log("seeding ...", Seeds)
     Seeds();
   })

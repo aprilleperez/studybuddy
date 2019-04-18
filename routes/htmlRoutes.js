@@ -45,23 +45,19 @@ module.exports = function (app) {
       //console.log("step 2", surveys)
       return
     })
-      
   });
 
 
   // favorites route, user clicks on favorites from nav bar and is taken to favorites page.  TODO: update findFavorites to use sequelize.Update examples:dbExamples to handlebars properties 
   app.get("/user/buddylist", isAuthenticated, function (req, res) {
-    db.Users.findAll({ where: { id:req.user.id } }).then(function (dbExample) {
-      // res.render("buddylist", { favorites: dbExample });
-      dbExample[0].getFriends().then(friends=>{
-        console.log(friends);
-        res.render('buddylist',{favorites:friends})
+    db.Users.findAll({ where: { id: req.user.id } }).then(function (dbExample) {
+      dbExample[0].getFriends().then(friends => {
+        // console.log(friends);
+        res.render('buddylist', { favorites: friends })
       })
     });
   });
-
   
-
   // Route for logging user out
   app.get("/logout", function (req, res) {
     req.logout();
@@ -73,10 +69,6 @@ module.exports = function (app) {
     res.render("404");
   });
 };
-
-
-// blahblah bablsjskjslkjflakfjlkj
-
 
 
     // example data is dummy people to test hbs card generation. TODO: We need real data.
