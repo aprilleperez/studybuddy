@@ -29,24 +29,20 @@ module.exports = function (app) {
     db.Users.findAll({}).then(function (dbExample) {
       res.render("matchpage", { matches: dbExample });
     });
-
-    // exampleData below is dummy data that is being passed thru. Need real data
-    // res.render("matchpage", /*your data here*/exampleData);
   });
 
 
   // favorites route, user clicks on favorites from nav bar and is taken to favorites page.  TODO: update findFavorites to use sequelize.Update examples:dbExamples to handlebars properties 
   app.get("/user/buddylist", isAuthenticated, function (req, res) {
-    db.Users.findAll({ where: { id:req.user.id } }).then(function (dbExample) {
-      // res.render("buddylist", { favorites: dbExample });
-      dbExample[0].getFriends().then(friends=>{
-        console.log(friends);
-        res.render('buddylist',{favorites:friends})
+    db.Users.findAll({ where: { id: req.user.id } }).then(function (dbExample) {
+      dbExample[0].getFriends().then(friends => {
+        // console.log(friends);
+        res.render('buddylist', { favorites: friends })
       })
     });
   });
 
-  
+
 
   // Route for logging user out
   app.get("/logout", function (req, res) {

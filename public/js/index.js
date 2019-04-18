@@ -51,7 +51,7 @@ function createAccount() {
       // log/show error
     }
     console.log('user creation data:', data);
-    newUserId=data.id;
+    newUserId = data.id;
     // If there's an error, handle it by throwing up a bootstrap alert
   }).catch(handleLoginErr);
 };
@@ -130,15 +130,15 @@ $("#submitButton").on("click", function () { // submit button on survey modal
   var topicQuestion1 = $("#topicQuestion").val();
   var subQuestion1 = $("#subQuestion").val();
   var remoteQuestion1 = $("#remoteQuestion").val();
-  if(remoteQuestion1==='Yes'){
-    remoteQuestion1= true;
+  if (remoteQuestion1 === 'Yes') {
+    remoteQuestion1 = true;
   }
   else {
     remoteQuestion1 = false;
   }
   var inPerson1 = $("#inPerson").val();
-  if(inPerson1==='Yes'){
-    inPerson1= true;
+  if (inPerson1 === 'Yes') {
+    inPerson1 = true;
   }
   else {
     inPerson1 = false;
@@ -155,28 +155,28 @@ $("#submitButton").on("click", function () { // submit button on survey modal
   var emailInput1 = $("#userEmail").val();
   var profilePictureInput1 = $("#userPictureInput").val();
 
- // store captured values into newSurvey object to send to DB
- var newSurvey = {
-  studytopic: topicQuestion1,
-  subtopic: subQuestion1,
-  preftime: timeQuestion1,
-  prefday: daysOfWeek1.join(", "),
-  meetvirtual: remoteQuestion1,
-  meetIP: inPerson1,
-  createdAt: new Date(),
-  updatedAt: new Date(),
-  UserId:newUserId
-}
-
-$.post("/api/submitSurvey", newSurvey).then(function (data) {
-  console.log(data);
-  if (data != 200) {
-    // log/show error
-    console.log("this is the conlog", $(this))
+  // store captured values into newSurvey object to send to DB
+  var newSurvey = {
+    studytopic: topicQuestion1,
+    subtopic: subQuestion1,
+    preftime: timeQuestion1,
+    prefday: daysOfWeek1.join(", "),
+    meetvirtual: remoteQuestion1,
+    meetIP: inPerson1,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    UserId: newUserId
   }
-  // If there's an error, handle it by throwing up a bootstrap alert
-})
-  
+
+  $.post("/api/submitSurvey", newSurvey).then(function (data) {
+    console.log(data);
+    if (data != 200) {
+      // log/show error
+      console.log("this is the conlog", $(this))
+    }
+    // If there's an error, handle it by throwing up a bootstrap alert
+  })
+
 });
 
 
@@ -252,16 +252,15 @@ $(document).ready(function () {
 
 // when user CLICKS FAVORITE STAR button
 $(".favoriteButton").click(function (event) { // when favorite button (class) is clicked
-  // alert("this was clicked");
   $(this).removeClass("far fa-star");
   $(this).addClass("fas fa-star");
   console.log($(this).data("id"));
   $.ajax(
     "/api/updateFavorite", {
-      type: "post", // NEED TO FIX
+      type: "post",
       data: { id: $(this).data("id") } // targets specific button clicked with that ID
     }).then(function (data) {
-      location.reload();
+   
     })
 });
 
