@@ -1,5 +1,5 @@
 body {
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
   /* background: rgb(43,12,255);
   background: linear-gradient(345deg, rgba(43,12,255,1) 0%, rgba(0,255,234,1) 85%); */
 }
@@ -45,7 +45,7 @@ body {
   margin-right: 20px;
   width: 250px;
   color: #6d3939;
-  border-radius: 15px;
+  border-radius: 0px;
   border-color: #6d3939;
 }
 
@@ -57,7 +57,7 @@ body {
 
 .modalButtons {
   color: #6d3939;
-  border-radius: 15px;
+  border-radius: 0px;
   border-color: #6d3939;
   background-color: white;
 }

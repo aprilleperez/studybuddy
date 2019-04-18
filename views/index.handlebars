@@ -52,9 +52,9 @@
 
   {{#if authenticated}}
   {{!-- if authenticated (true) --}}
-  <h1 class="text-center">Welcome to Study Buddy</h1>
+  <h1 class="text-center">Welcome to Study Buddy!</h1>
   <br>
-  <h4 class="text-center">View your previous matches, check out your saved buddies, or start a new survey!</h4>
+  <h4 class="text-center">View your previous matches, check out your saved buddies, or start a new survey.</h4>
 
   <div class="landingCTA">
     <a href="/user/matches"><button type="button" class="btn btn-outline-primary matches-button landingButtons">Matches</button></a>
@@ -89,35 +89,36 @@
       <div class="modal-body">
         <form>
           <div class="form-group">
-            <label for="createFirstname" class="col-form-label">First Name</label>
+            <label for="createFirstname" class="col-form-label">First Name*</label>
             <input type="text" class="form-control" id="createFirstname" placeholder="Sam">
           </div>
           <div class="form-group">
-            <label for="createLastname" class="col-form-label">Last Name</label>
+            <label for="createLastname" class="col-form-label">Last Name*</label>
             <input type="text" class="form-control" id="createLastname" placeholder="Smith">
           </div>
           <div class="form-group">
-            <label for="createUsername" class="col-form-label">Username</label>
+            <label for="createUsername" class="col-form-label">Username*</label>
             <input type="text" class="form-control" id="createUsername" placeholder="Username">
           </div>
           <div class="form-group">
-            <label for="createPassword" id="passwordInput" class="col-form-label">Password</label>
+            <label for="createPassword" id="passwordInput" class="col-form-label">Password*</label>
             <input type="password" class="form-control" id="createPassword" placeholder="Password">
           </div>
           <div class="form-group">
-            <label for="createEmail" class="col-form-label">Email</label>
+            <label for="createEmail" class="col-form-label">Email*</label>
             <input type="email" class="form-control" id="createEmail" placeholder="example@email.com">
           </div>
           <div class="form-group">
-            <label for="createLocation" class="col-form-label">Location</label>
+            <label for="createLocation" class="col-form-label">Location (zip code)*</label>
             <input type="text" pattern="[0-9]*" class="form-control" id="createLocation" placeholder="Ex: 98101">
             {{!-- may need to convert to number --}}
           </div>
           <button type="button" id="upload_widget" class="cloudinary-button">Upload Profile
-            Picture</button>
+            Picture</button>*
         </form>
       </div>
       <div class="modal-footer">
+        <small>*Required fields</small>
         <button type="button" class="btn btn-primary create-button modalButtons" id="createAccount-button" data-toggle="modal"
           data-target="#modal2" data-dismiss="modal">Create</button>
       </div>
