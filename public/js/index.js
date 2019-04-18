@@ -230,7 +230,6 @@ $(document).ready(function () {
       $("#subQuestion").append("   <option>Classics</option>")
       $("#subQuestion").append("   <option>Fantasy</option>")
       $("#subQuestion").append("   <option>Historical Fiction</option>")
-      $("#subQuestion").append("   <option>Differential Equations</option>")
     } else if ($(this)[0].value === "Exercise Sciences") {
       $("#subQuestion").empty();
       $("#subQuestion").append("   <option>Kinesiology</option>")
@@ -269,6 +268,9 @@ $(".favoriteButton").click(function (event) { // when favorite button (class) is
    
     })
 });
+
+// when user HOVERS FAVORITE STAR button
+$('.favoriteButton').popover();
 
 
 
