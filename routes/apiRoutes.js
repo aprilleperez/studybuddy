@@ -38,16 +38,6 @@ module.exports = function (app) {
     });
   });
 
-<<<<<<< HEAD
-  // ????? get matches for user for user search (match results) page. TODO: update db.Example per handlebars specifications 
-  app.get("/api/getMatches", function (req, res) {
-    db.Example.findAll(res.user).then(function (dbExamples) {
-      // need proper route to html page showing the matches NOT dbExamples
-      res.json(dbExamples);
-    });
-  });
-=======
->>>>>>> 0e8bc0d5f2a0de6977ca6cfe11907b2cf933bf3d
 
   // user clicks to favorite a profile and this information is sent to Table 3: Favorites in DB (favorites).
   app.post("/api/updateFavorite", function (req, res) {
@@ -60,17 +50,6 @@ module.exports = function (app) {
     // });
   });
 
-<<<<<<< HEAD
-  // user clicks on favorites and is presented with a list of all of the people they have marked as favorites. TODO: update db.Example per handlebars specifications 
-  app.get("/api/getFavorites", function (req, res) {
-    db.favorites.findAll(res.user).then(function (dbExamples) {
-      // need proper route to html page showing user's favorites NOT dbExamples
-      res.json(dbfavorites);
-    });
-  });
-=======
-
->>>>>>> 0e8bc0d5f2a0de6977ca6cfe11907b2cf933bf3d
   // user updates favorites
   app.put("/api/updateFavorite", function (req, res) {
     db.favorites.update(res.user, res.userID, res.favoriteId).then(function (dbfavorites) {
