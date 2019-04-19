@@ -24,7 +24,7 @@ module.exports = function (app) {
   });
 
   // user is taken to User Search (results/matches) page /user/matches
-  app.get("/user/matches", isAuthenticated, function (req, res) {    
+  app.get("/user/matches", isAuthenticated, function (req, res) {
     findMatches(req.user.id, function (bestMatchIds, additionalIds) {
       db.Users.findAll({
         where: { id: bestMatchIds }
@@ -95,11 +95,17 @@ function findMatches(userId, cb) {
       }
     }).then(function (surveys) {
 
+      var overAllUsersMatched = [];
+
       var matchedUsersInPerson = [];
       var matchedUsersRemote = [];
 
       //this code determines the TOP BUDDIES based on Sub-Topic, Days, Times, Remote, In-Person
       surveys.forEach(survey => {
+        if (overAllUsersMatched.includes(survey.UserId)) {
+          return;
+        }
+
         //this code looks to compare users sub-topic
         if (survey.subtopic != userSubtopic) {
           return;
@@ -113,10 +119,12 @@ function findMatches(userId, cb) {
             // alg looks for those who also selected remote
             if (userRemote && userRemote == survey.meetvirtual) {
               matchedUsersRemote.push(survey.UserId);
+              overAllUsersMatched.push(survey.UserId);
             }
             //alg looks for those who also selected in person  
-            if (userInPerson && userInPerson == survey.meetIP) {
+            if (!overAllUsersMatched.includes(survey.UserId) && userInPerson && userInPerson == survey.meetIP) {
               matchedUsersInPerson.push(survey.UserId);
+              overAllUsersMatched.push(survey.UserId);
             }
           }
         });
@@ -125,6 +133,7 @@ function findMatches(userId, cb) {
       //this combines the in person and remote users to compile the final matches list 
       //slice shows the first 3 (top 3 matches) only if there are at least 3 matches
       var bestMatches = matchedUsersInPerson.concat(matchedUsersRemote).slice(0, 3);
+      overAllUsersMatched = overAllUsersMatched.slice(0, 3);
 
       //here we start looking for ADDITIONAL MATCHES
       var additionalMatches = [];
@@ -133,7 +142,7 @@ function findMatches(userId, cb) {
 
       surveys.forEach(survey => {
         //skips over users who have already been added
-        if (bestMatches.includes(survey.UserId)) {
+        if (overAllUsersMatched.includes(survey.UserId)) {
           return;
         }
         //looks for user who selected the same Sub-Topic
@@ -143,21 +152,21 @@ function findMatches(userId, cb) {
         //if additional matches were found, adds matches to the page
         if (additionalMatches.length < 3) {
           additionalMatches.push(survey.UserId);
+          overAllUsersMatched.push(survey.UserId);
         }
       });
-
 
       //this code is used if there are still less than 3 matches for the additional matches by parent Topic.
       if (additionalMatches.length < 3) {
         surveys.forEach(survey => {
           //skips over users who have already been added
-          if (bestMatches.includes(survey.UserId) ||
-            additionalMatches.includes(survey.UserId)) {
+          if (overAllUsersMatched.includes(survey.UserId)) {
             return;
           }
           //if additional matches were found, adds matches to the additional matches section
           if (additionalMatches.length < 3) {
             additionalMatches.push(survey.UserId);
+            overAllUsersMatched.push(survey.UserId);
           }
         });
       }
@@ -168,5 +177,3 @@ function findMatches(userId, cb) {
     })
   });
 }
-
-

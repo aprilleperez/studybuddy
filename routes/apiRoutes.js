@@ -11,8 +11,10 @@ module.exports = function (app) {
   // otherwise send back an error
   app.post("/api/signup", function (req, res) {
     console.log(req.body);
-    db.Users.create(req.body).then(function (userData) {
-      res.json(userData)
+    db.Users.create(req.body).then(function (userData) {      
+      passport.authenticate("local")(req, res, function () {
+        res.json(userData);
+      });
       // res.sendStatus(200);
     }).catch(function (err) {
       console.log(err);
@@ -50,11 +52,10 @@ module.exports = function (app) {
     // });
   });
 
-
   // user updates favorites
   app.put("/api/updateFavorite", function (req, res) {
-    db.Example.updateFavorite(res.user, res.favUserID, res.isFav).then(function (dbExamples) {
-      res.json(dbExamples);
+    db.favorites.update(res.user, res.userID, res.favoriteId).then(function (dbfavorites) {
+      res.json(dbfavorites);
     });
   });
 
