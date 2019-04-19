@@ -12,6 +12,10 @@ body {
   line-height: 2.5;
 }
 
+.brown {
+  color: #6d3939;
+}
+
 
 
 /* ---------------------------------------- */
@@ -25,6 +29,7 @@ body {
 .cstmNavLink {
   color: orange;
 }
+
 
 
 
@@ -118,12 +123,13 @@ body {
 /* ---------------------------------------- */
 
 .matchContainer {
-  /* background: rgb(200,230,245);
-  background: linear-gradient(345deg, rgba(200,230,245,1) 0%, rgba(92,160,211,1) 80%); */
+  background: rgb(255,255,255);
+  background: linear-gradient(180deg, rgba(255,255,255,0.4640231092436975) 0%, rgba(200,230,245,1) 100%);
   /* margin-top: 20px; */
+  /* background: red; */
   margin-bottom: 20px;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 
 .topMatches, .moreMatches {
@@ -168,8 +174,7 @@ body {
   /* margin-top: 20px; */
   background: rgb(255,255,255);
   background: linear-gradient(180deg, rgba(255,255,255,0.4640231092436975) 0%, rgba(248,249,250,1) 100%);
-  /* margin-bottom: 20px; */
-  padding-top: 20px;
+  padding-top: 50px;
   padding-bottom: 20px;
   height: 100vh;
   overflow: auto;

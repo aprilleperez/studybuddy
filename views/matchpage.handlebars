@@ -37,10 +37,11 @@
     <div class="text-center matchHeader">
         <h5>Based on your survey, here are your</h5>
         <h1>Top Buddies!</h1>
+        <br>
     </div>
 
     {{!-- NEED A #EACH to render these cards, delete dummy code after first one --}}
-    <div class="topMatches">
+    <div class="container topMatches">
         {{#each matches}}
         {{!-- bestMatches --}}
         <div class="card matchCard" style="width: 18rem;">
@@ -56,6 +57,9 @@
             </div>
         </div>
         {{/each}}
+        {{#unless matches}}
+        <small>Sorry! Looks like we couldn't find a close enough match. Please see other recommended buddies below!</small>
+        {{/unless}}
 
 
     </div>
@@ -69,7 +73,7 @@
         <h5>Here are a few more buddies to see</h5>
     </div>
 
-    <div class="moreMatches">
+    <div class="container moreMatches">
         {{#each addtional}}
         {{!-- additionalMatches --}}
         <div class="card matchCard" style="width: 18rem;">
@@ -78,7 +82,7 @@
             <i data-id="{{this.id}}" id="favorite" class="favoriteButton far fa-star" data-content="Click to favorite this buddy!" rel="popover" data-placement="bottom" data-trigger="hover"></i>
 
             <div class="card-body cardInfo">
-                <p class="card-text">{{this.first_name}} {{this.last_name}}</p>
+                <p class="card-text cardName"><strong>{{this.first_name}} {{this.last_name}}</strong></p>
                 <p class="card-text">Username: {{this.username}}</p>
                 <p class="card-text"><a href="mailto:{{this.email}}">Email: {{this.email}}</a></p>
                 <p class="card-text">Located: {{this.location}}</p>
