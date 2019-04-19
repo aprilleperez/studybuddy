@@ -197,7 +197,7 @@ $(document).ready(function () {
       $("#subQuestion").append("   <option>Calculus</option>")
       $("#subQuestion").append("   <option>Geometry</option>")
       $("#subQuestion").append("   <option>Number Theory</option>")
-      $("#subQuestion").append("   <option value='diffeq'>Differential Equations</option>")
+      $("#subQuestion").append("   <option>Differential Equations</option>")
     } else if ($(this)[0].value === "Science") {
       $("#subQuestion").empty();
       $("#subQuestion").append("   <option>Physics</option>")
