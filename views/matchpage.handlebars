@@ -36,7 +36,7 @@
 
     <div class="text-center matchHeader">
         <h5>Based on your survey, here are your</h5>
-        <h1>Top 3 Buddies!</h1>
+        <h1>Top Buddies!</h1>
     </div>
 
     {{!-- NEED A #EACH to render these cards, delete dummy code after first one --}}
@@ -70,7 +70,7 @@
     </div>
 
     <div class="moreMatches">
-        {{#each matches}}
+        {{#each addtional}}
         {{!-- additionalMatches --}}
         <div class="card matchCard" style="width: 18rem;">
             <img src="{{this.photo}}" class="card-img-top" alt="Match Photo">

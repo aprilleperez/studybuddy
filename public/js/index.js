@@ -252,6 +252,8 @@ $(document).ready(function () {
       $("#subQuestion").append("   <option>Marketing</option>")
     }
   })
+
+  $("#topicQuestion").val(0);
 });
 
 

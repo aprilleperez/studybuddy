@@ -15,14 +15,6 @@ module.exports = function (sequelize, DataTypes) {
         },
         meetvirtual: DataTypes.BOOLEAN,
         meetIP: DataTypes.BOOLEAN,
-        //the below should not be needed by Sequelize 
-        //username: {
-        //     type: DataTypes.STRING,
-        //     references: {
-        //         model: "Users",
-        //         key: "username"
-        //     }
-        // },
     });
 
     Survey.associate = function (models) {
