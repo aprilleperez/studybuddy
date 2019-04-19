@@ -272,9 +272,14 @@ $(".favoriteButton").click(function (event) { // when favorite button (class) is
     })
 });
 
-// when user HOVERS FAVORITE STAR button
+// when HOVERS FAVORITE button
 $('.favoriteButton').popover();
 
+$('.email').popover();
+
+$("#about-link").click(function (event) {
+  $(".aboutSection").addClass("textFade");
+})
 
 
 /////////////////////////////////////////////////////////////////

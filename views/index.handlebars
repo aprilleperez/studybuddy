@@ -36,35 +36,39 @@
 {{!-- LANDING CONTENT --}}
 <div class="jumbotron landingJumbo">
   {{#unless authenticated}}
-  <h4 class="text-center">Want help from other students?</h4>
-  <br>
-  <h1 class="text-center brown">Find a buddy to study the same subject as you!</h1>
-
-  <div class="landingCTA">
-    <button type="button" class="btn btn-outline-primary signup-button landingButtons" data-toggle="modal"
-      data-target="#modal1">Sign
-      Up</button>
+  <div class="nologLanding">
+    <h4 class="text-center">Want help from other students?</h4>
     <br>
+    <h1 class="text-center brown">Find a buddy to study the same subject as you!</h1>
+
+    <div class="landingCTA textFade">
+      <button type="button" class="btn btn-outline-primary signup-button landingButtons" data-toggle="modal"
+        data-target="#modal1">Sign
+        Up</button>
+      <br>
+    </div>
+
+    <p class="loginMsg textFade"><small> or <a href="#login-modal" data-toggle="modal" data-target="#login-modal">login</a> if you have an account.</small></p>
   </div>
 
-  <p class="loginMsg"><small> or <a href="#login-modal" data-toggle="modal" data-target="#login-modal">login</a> if you
-      have an account.</small></p>
   {{/unless}}
 
   {{#if authenticated}}
   {{!-- if authenticated (true) --}}
-  <h1 class="text-center brown">Welcome to Study Buddy!</h1>
-  <br>
-  <h5 class="text-center">View your previous matches, check out your saved buddies, or start a new survey.</h5>
+  <div class="logLanding">
+    <h1 class="text-center brown textFade">Welcome to Study Buddy!</h1>
+    <br>
+    <h5 class="text-center textFade">View your previous matches, check out your saved buddies, or start a new survey.</h5>
 
-  <div class="landingCTA">
-    <a href="/user/matches"><button type="button"
-        class="btn btn-outline-primary matches-button landingButtons">Matches</button></a>
-    <a href="/user/buddylist"><button type="button"
-        class="btn btn-outline-primary buddylist-button landingButtons">Favorites</button></a>
-    <button type="button" class="btn btn-outline-primary survey-button landingButtons" data-toggle="modal"
-      data-target="#modal2">Take
-      Survey</button>
+    <div class="landingCTA textFade">
+      <a href="/user/matches"><button type="button"
+          class="btn btn-outline-primary matches-button landingButtons">Matches</button></a>
+      <a href="/user/buddylist"><button type="button"
+          class="btn btn-outline-primary buddylist-button landingButtons">Favorites</button></a>
+      <button type="button" class="btn btn-outline-primary survey-button landingButtons" data-toggle="modal"
+        data-target="#modal2">Take
+        Survey</button>
+    </div>
   </div>
   {{/if}}
 </div>
@@ -77,7 +81,10 @@
   </div>
 
   <div class="container aboutBody">
-    <p>Study Buddy is a simple app Lorem ipsum dolor sit, amet consectetur adipisicing elit. In ipsum ratione tempora mollitia et? Ipsa vel vero praesentium nam vitae ut doloribus, maxime repellendus in sapiente corporis quibusdam aliquid animi? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Obcaecati debitis impedit alias, beatae tempore error nulla minima neque sit? Placeat nobis quas cum velit? Ut earum harum sed nulla non.</p>
+    <p>Study Buddy is a simple app Lorem ipsum dolor sit, amet consectetur adipisicing elit. In ipsum ratione tempora
+      mollitia et? Ipsa vel vero praesentium nam vitae ut doloribus, maxime repellendus in sapiente corporis quibusdam
+      aliquid animi? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Obcaecati debitis impedit alias, beatae
+      tempore error nulla minima neque sit? Placeat nobis quas cum velit? Ut earum harum sed nulla non.</p>
   </div>
 
 </div>
