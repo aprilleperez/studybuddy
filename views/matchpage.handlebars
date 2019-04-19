@@ -1,5 +1,6 @@
+<span id="top"></span>
 {{!-- NAVBAR --}}
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light cstmNavBar">
     <a class="navbar-brand" href="/">Study Buddy</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
         aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -8,22 +9,26 @@
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/#about">About <span class="sr-only">(current)</span></a>
+                <a class="nav-link cstmNavLink" id="about-link" href="/#about">About <span
+                        class="sr-only">(current)</span></a>
             </li>
             {{#unless authenticated}}
+            {{!-- ^^ not authenticated (falsey value) --}}
             <li class="nav-item">
-                <a class="nav-link" href="#">Login</a>
+                <a class="nav-link cstmNavLink" href="#login-modal" data-toggle="modal"
+                    data-target="#login-modal">Login</a>
             </li>
             {{/unless}}
             {{#if authenticated}}
+            {{!-- if authenticated (true) --}}
             <li class="nav-item">
-                <a class="nav-link active" href="/user/matches">Matches</a>
+                <a class="nav-link active cstmNavLink" href="/user/matches">Matches</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/user/buddylist">Favorites</a>
+                <a class="nav-link cstmNavLink" href="/user/buddylist">Favorites</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/logout">Logout</a>
+                <a class="nav-link cstmNavLink" href="/logout">Logout</a>
             </li>
             {{/if}}
         </ul>
@@ -36,26 +41,34 @@
 
     <div class="text-center matchHeader">
         <h5>Based on your survey, here are your</h5>
-        <h1>Top Buddies!</h1>
+        <h1 class="brown">Top Buddies!</h1>
+        <br>
     </div>
 
-    {{!-- NEED A #EACH to render these cards, delete dummy code after first one --}}
-    <div class="topMatches">
+    <div class="container topMatches">
         {{#each matches}}
-        {{!-- bestMatches --}}
-        <div class="card matchCard" style="width: 18rem;">
+        <div class="card matchCard textFade" class="card matchCard textFade" style="width: 18rem;">
             <img src="{{this.photo}}" class="card-img-top" alt="Match Photo">
 
-            <i data-id="{{this.id}}" id="favorite" class="favoriteButton far fa-star" data-content="Click to favorite this buddy!" rel="popover" data-placement="bottom" data-trigger="hover"></i>
+            <i data-id="{{this.id}}" id="favorite" class="favoriteButton far fa-star"
+                data-content="Click to favorite this buddy!" rel="popover" data-placement="bottom"
+                data-trigger="hover"></i>
 
             <div class="card-body cardInfo">
                 <p class="card-text cardName"><strong>{{this.first_name}} {{this.last_name}}</strong></p>
-                <p class="card-text">Username: {{this.username}}</p>
-                <p class="card-text"><a href="mailto:{{this.email}}">Email: {{this.email}}</a></p>
-                <p class="card-text">Located: {{this.location}}</p>
+                <p class="card-text"><i class="fas fa-user brown"> : </i> {{this.username}}</p>
+                <p class="card-text email" data-content="Click to get in touch!" rel="popover" data-placement="top"
+                    data-trigger="hover"><a href="mailto:{{this.email}}"><i class="fas fa-envelope brown"> : </i>
+                        {{this.email}}</a></p>
+                <p class="card-text"><i class="fas fa-location-arrow brown"> : </i> {{this.location}}</p>
             </div>
         </div>
         {{/each}}
+
+        {{#unless matches}}
+        <p>Sorry! Looks like we couldn't find a close enough match. Please see other recommended buddies
+            below!</p>
+        {{/unless}}
 
 
     </div>
@@ -66,22 +79,25 @@
 <div class="moreMatchesContainer">
 
     <div class="text-center matchHeader">
-        <h5>Here are a few more buddies to see</h5>
+        <h4>Here are a few more buddies to see</h4>
     </div>
 
-    <div class="moreMatches">
+    <div class="container moreMatches">
         {{#each addtional}}
-        {{!-- additionalMatches --}}
-        <div class="card matchCard" style="width: 18rem;">
+        <div class="card matchCard textFade" style="width: 18rem;">
             <img src="{{this.photo}}" class="card-img-top" alt="Match Photo">
 
-            <i data-id="{{this.id}}" id="favorite" class="favoriteButton far fa-star" data-content="Click to favorite this buddy!" rel="popover" data-placement="bottom" data-trigger="hover"></i>
+            <i data-id="{{this.id}}" id="favorite" class="favoriteButton far fa-star"
+                data-content="Click to favorite this buddy!" rel="popover" data-placement="bottom"
+                data-trigger="hover"></i>
 
             <div class="card-body cardInfo">
-                <p class="card-text">{{this.first_name}} {{this.last_name}}</p>
-                <p class="card-text">Username: {{this.username}}</p>
-                <p class="card-text"><a href="mailto:{{this.email}}">Email: {{this.email}}</a></p>
-                <p class="card-text">Located: {{this.location}}</p>
+                <p class="card-text cardName"><strong>{{this.first_name}} {{this.last_name}}</strong></p>
+                <p class="card-text"><i class="fas fa-user brown"> : </i> {{this.username}}</p>
+                <p class="card-text email" data-content="Click to get in touch!" rel="popover" data-placement="top"
+                    data-trigger="hover"><a href="mailto:{{this.email}}"><i class="fas fa-envelope brown"> : </i>
+                        {{this.email}}</a></p>
+                <p class="card-text"><i class="fas fa-location-arrow brown"> : </i> {{this.location}}</p>
             </div>
         </div>
         {{/each}}
@@ -91,9 +107,11 @@
 </div>
 
 
-{{!-- JS SCRIPTS --}}
-{{!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> --}}
-{{!-- <script src="/js/index.js"></script> --}}
+{{!-- Footer --}}
+<footer class="page-footer font-small">
+  <div class="footer-copyright text-center py-3">© 2019 Copyright:
+    <a href="https://github.com/aprilleperez/studybuddy">Study Buddy</a>
+  </div>
+</footer>
 
-
-{{!-- DRAFT OF DYNAMIC HBS CREATION --}}
+<a href="#top" id="back-to-top" class="back-to-top" style="display: inline;">Top</a>
