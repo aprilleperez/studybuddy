@@ -1,3 +1,4 @@
+<span id="top"></span>
 {{!-- NAVBAR --}}
 <nav class="navbar navbar-expand-lg navbar-light cstmNavBar">
   <a class="navbar-brand" href="/">Study Buddy</a>
@@ -48,17 +49,18 @@
       <br>
     </div>
 
-    <p class="loginMsg textFade"><small> or <a href="#login-modal" data-toggle="modal" data-target="#login-modal">login</a> if you have an account.</small></p>
+    <p class="loginMsg textFade"><small> or <a href="#login-modal" data-toggle="modal"
+          data-target="#login-modal">login</a> if you have an account.</small></p>
   </div>
 
   {{/unless}}
 
   {{#if authenticated}}
-  {{!-- if authenticated (true) --}}
   <div class="logLanding">
     <h1 class="text-center brown textFade">Welcome to Study Buddy!</h1>
     <br>
-    <h5 class="text-center textFade">View your previous matches, check out your saved buddies, or start a new survey.</h5>
+    <h5 class="text-center textFade">View your previous matches, check out your saved buddies, or start a new survey.
+    </h5>
 
     <div class="landingCTA textFade">
       <a href="/user/matches"><button type="button"
@@ -77,14 +79,36 @@
 <div class="aboutSection" id="about">
 
   <div class="aboutHeader">
-    <h1 class="text-center">What is Study Buddy?</h1>
+    <h1 class="text-center brown">What is Study Buddy?</h1>
   </div>
 
   <div class="container aboutBody">
-    <p>Study Buddy is a simple app Lorem ipsum dolor sit, amet consectetur adipisicing elit. In ipsum ratione tempora
-      mollitia et? Ipsa vel vero praesentium nam vitae ut doloribus, maxime repellendus in sapiente corporis quibusdam
-      aliquid animi? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Obcaecati debitis impedit alias, beatae
-      tempore error nulla minima neque sit? Placeat nobis quas cum velit? Ut earum harum sed nulla non.</p>
+    <p>
+      <h3>Studying with a Buddy</h3>
+      Study Buddy was founded by four students who saw a better way to find a study buddy! This is an app for those who find learning more relatable by peers going through the same subject! Based out of <span class="brown">Seattle, Washington</span>, Study Buddy helps those who want to learn to connect with others who are interested in the same topics and sub-topics. You can connect with who you want, when you want, on your own terms. Welcome to our community, and happy studying!
+    </p>
+
+    <br>
+
+    <p>
+      <h3>How Does It Work?</h3>
+     It's quick and simple! To use Study Buddy, <span class="brown">sign up for an account</span> and <span class="brown">take a quick initial survey</span>! You will then be shown the top 3 buddies who most closely match your preferences. Otherwise, you will be shown 3 more buddies who you can connect with. If you enjoyed the connection or simply want to save their info, just <span class="brown">favorite their profile card</span> and see on your Favorites page just how many buddies you've been able to connect with! 
+    </p>
+
+    <br>
+
+    <p>
+      <h3>FAQs</h3>
+      Don’t see your study topic or subtopic? Email us at <span
+        class="brown"><strong>studybuddy@smart.com</strong></span> and we’ll add it!
+      <br>
+      No longer want to study with a buddy? We are sad to see you go. Click <span
+        class="brown"><strong>here</strong></span> and we’ll
+      begin the process to remove
+      your account.
+      <br>
+      See more here: <a href="https://github.com/aprilleperez/studybuddy"><i class="fab fa-github brown"></i></a>
+    </p>
   </div>
 
 </div>
@@ -106,37 +130,38 @@
         <form>
           <div class="form-group">
             <label for="createFirstname" class="col-form-label">First Name*</label>
-            <input type="text" class="form-control" id="createFirstname" placeholder="Sam">
+            <input required="required" type="text" class="form-control" id="createFirstname" placeholder="Sam">
           </div>
           <div class="form-group">
             <label for="createLastname" class="col-form-label">Last Name*</label>
-            <input type="text" class="form-control" id="createLastname" placeholder="Smith">
+            <input required="required" type="text" class="form-control" id="createLastname" placeholder="Smith">
           </div>
           <div class="form-group">
             <label for="createUsername" class="col-form-label">Username*</label>
-            <input type="text" class="form-control" id="createUsername" placeholder="Username">
+            <input required="required" type="text" class="form-control" id="createUsername" placeholder="Username">
           </div>
           <div class="form-group">
             <label for="createPassword" id="passwordInput" class="col-form-label">Password*</label>
-            <input type="password" class="form-control" id="createPassword" placeholder="Password">
+            <input required="required" type="password" class="form-control" id="createPassword" placeholder="Password">
           </div>
           <div class="form-group">
             <label for="createEmail" class="col-form-label">Email*</label>
-            <input type="email" class="form-control" id="createEmail" placeholder="example@email.com">
+            <input required="required" type="email" class="form-control" id="createEmail"
+              placeholder="example@email.com">
           </div>
           <div class="form-group">
             <label for="createLocation" class="col-form-label">Location (zip code)*</label>
-            <input type="text" pattern="[0-9]*" class="form-control" id="createLocation" placeholder="Ex: 98101">
-            {{!-- may need to convert to number --}}
+            <input required="required" type="text" pattern="[0-9]*" class="form-control" id="createLocation"
+              placeholder="Ex: 98101">
           </div>
           <button type="button" id="upload_widget" class="cloudinary-button">Upload Profile
             Picture</button>*
         </form>
       </div>
       <div class="modal-footer">
-        <small>*Required fields</small>
         <button type="button" class="btn btn-primary create-button modalButtons" id="createAccount-button"
           data-toggle="modal" data-target="#modal2" data-dismiss="modal">Create</button>
+        <small>*Required fields</small>
       </div>
     </div>
   </div>
@@ -177,7 +202,6 @@
             </div>
           </div>
 
-
           <!--sub topic question - need jquery to dynamically display based on chosen topic -->
           <div id="sub-topic-question">
             <div class="form-group">
@@ -215,15 +239,6 @@
             </div>
           </div>
 
-          <!--zip code Question Modal-->
-          {{!-- <div id="zip-Code">
-            <div class="form-group">
-              <label for="zipCode">Zip Code</label>
-              <input type="text" class="form-control" id="zipCode" aria-describedby="zipHelp" placeholder="98101">
-            </div>
-          </div> --}}
-
-
           <!--time Question Modal-->
           <div id="time-Question">
             <div class="form-group">
@@ -237,9 +252,8 @@
               </span>
             </div>
           </div>
+
           <!-- Check Box question for day of the week-->
-
-
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="checkbox" name="daysOfWeek" value="Monday">
             <label for="Monday">Monday</label>
@@ -309,3 +323,14 @@
     </div>
   </div>
 </div>
+
+
+{{!-- Footer --}}
+<footer class="page-footer font-small">
+  <div class="footer-copyright text-center py-3">© 2019 Copyright:
+    <a href="https://github.com/aprilleperez/studybuddy">Study Buddy</a>
+  </div>
+</footer>
+
+
+<a href="#top" id="back-to-top" class="back-to-top" style="display: inline;">Top</a>

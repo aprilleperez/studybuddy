@@ -272,19 +272,23 @@ $(".favoriteButton").click(function (event) { // when favorite button (class) is
     })
 });
 
-// when HOVERS FAVORITE button
+// when user HOVERS FAVORITE button
 $('.favoriteButton').popover();
 
+// when user HOVERS EMAIL
 $('.email').popover();
 
+// when user CLICKS ABOUT LINK
 $("#about-link").click(function (event) {
   $(".aboutSection").addClass("textFade");
 })
 
 
+
 /////////////////////////////////////////////////////////////////
 // CLOUDINARY THINGS                                           //
 /////////////////////////////////////////////////////////////////
+
 // creates widget w/ relative name/preset keys
 var myWidget = cloudinary.createUploadWidget({
   cloudName: 'studybuddy123',
@@ -299,10 +303,50 @@ var myWidget = cloudinary.createUploadWidget({
     $("#cloudUrl").val(pictureImage)
   }
 });
+
 // opens widget when click upload button
 document.getElementById("upload_widget").addEventListener("click", function () {
   myWidget.open();
 }, false);
+
+
+
+/////////////////////////////////////////////////////////////////
+// BACK TO TOP BUTTON                                          //
+/////////////////////////////////////////////////////////////////
+
+var link = document.getElementById("back-to-top");
+var amountScrolled = 250;
+
+function addClass(el, className) {
+    if (el.classList) {
+        el.classList.add(className);
+    } else {
+        el.className += ' ' + className;
+    }
+
+}
+
+function removeClass(el, className) {
+    if (el.classList)
+        el.classList.remove(className);
+    else
+        el.className = el.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
+}
+
+window.addEventListener('scroll', function (e) {
+    if (window.scrollY > amountScrolled) {
+        addClass(link, 'show');
+    } else {
+        removeClass(link, 'show');
+    }
+});
+
+$('#back-to-top').click(function (event) {  // when start button is clicked
+    $('html,body').animate({ // animate page to scroll to top
+        scrollTop: $("#top").offset().top
+    }, 'slow');
+});
 
 
 

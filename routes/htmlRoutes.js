@@ -5,7 +5,6 @@ var db = require("../models");
 // Requiring our custom middleware for checking if a user is logged in
 var isAuthenticated = require("../config/middleware/isAuthenticated");
 
-// var fakeArray = [{id:1, text:'someText'}, {id:1, text:'Some other burger text'}];
 
 module.exports = function (app) {
   // root route: landing page. 
