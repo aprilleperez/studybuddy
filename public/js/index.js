@@ -5,7 +5,7 @@
 function loginAction() {
   var userEmail = $("#userEmail").val().trim(); // grab user input for username
   var password = $("#password").val().trim(); // grab user input for password
-
+ 
   $.post("/api/login", {
     email: userEmail,
     password: password
@@ -95,6 +95,7 @@ $("#about-link").click(function (event) {
 
 // when user CLICKS LOGIN navlink
 $("#login-button").click(function (event) {
+  event.preventDefault();
   loginAction();
   $("#username").val("");
   $("#password").val("");
