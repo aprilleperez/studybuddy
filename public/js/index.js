@@ -230,7 +230,6 @@ $(document).ready(function () {
       $("#subQuestion").append("   <option>Classics</option>")
       $("#subQuestion").append("   <option>Fantasy</option>")
       $("#subQuestion").append("   <option>Historical Fiction</option>")
-      $("#subQuestion").append("   <option>Differential Equations</option>")
     } else if ($(this)[0].value === "Exercise Sciences") {
       $("#subQuestion").empty();
       $("#subQuestion").append("   <option>Kinesiology</option>")
@@ -253,6 +252,8 @@ $(document).ready(function () {
       $("#subQuestion").append("   <option>Marketing</option>")
     }
   })
+
+  $("#topicQuestion").val(0);
 });
 
 
@@ -270,6 +271,9 @@ $(".favoriteButton").click(function (event) { // when favorite button (class) is
     })
 });
 
+// when user HOVERS FAVORITE STAR button
+$('.favoriteButton').popover();
+
 
 
 /////////////////////////////////////////////////////////////////
@@ -277,13 +281,14 @@ $(".favoriteButton").click(function (event) { // when favorite button (class) is
 /////////////////////////////////////////////////////////////////
 // creates widget w/ relative name/preset keys
 var myWidget = cloudinary.createUploadWidget({
-  cloudName: 'bootcampbuddy',
-  uploadPreset: 'rnuetcvd'
+  cloudName: 'studybuddy123',
+  uploadPreset: 'yrwer6bi'
 }, (error, result) => {
   if (!error && result && result.event === "success") {
     // logs the results of sending image to cloudinary
     console.log('Done! Here is the image info: ', result.info.url);
     let pictureImage = result.info.url
+    console.log(result.info.url)
     // updates hidden input with response url
     $("#cloudUrl").val(pictureImage)
   }

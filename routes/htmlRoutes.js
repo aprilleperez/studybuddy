@@ -8,7 +8,7 @@ var isAuthenticated = require("../config/middleware/isAuthenticated");
 // var fakeArray = [{id:1, text:'someText'}, {id:1, text:'Some other burger text'}];
 
 module.exports = function (app) {
-  // root route: landing page. TODO: Hook in user authentication
+  // root route: landing page. 
   app.get("/", function (req, res) {
     if (req.user) {
       // return res.redirect("/user/matches");
@@ -23,41 +23,26 @@ module.exports = function (app) {
     }
   });
 
-  // user is taken to User Search (results/matches) page /user/matches TODO: update findAll to use algorithm.js.Update examples:dbExamples to handlebars properties 
-  app.get("/user/matches", isAuthenticated, function (req, res) {
-    //get the data and put it in an object
-    //     db.Users.findAll({}).then(function (dbExample) {
-    //       res.render("matchpage", { matches: dbExample });
-    //     });
-
-    findMatches(req.user.id, function (matchedUserIds) {
+  // user is taken to User Search (results/matches) page /user/matches
+  app.get("/user/matches", isAuthenticated, function (req, res) {    
+    findMatches(req.user.id, function (bestMatchIds, additionalIds) {
       db.Users.findAll({
-        where: { id: matchedUserIds }
-      }).then(function (matches) {
-        return res.render("matchpage", /*your data here*/{ matches: matches });
+        where: { id: bestMatchIds }
+      }).then(function (bestMatches) {
+
+        db.Users.findAll({
+          where: { id: additionalIds }
+        }).then(function (additionalMatches) {
+
+          return res.render("matchpage",
+            { matches: bestMatches, addtional: additionalMatches });
+        });
       });
     });
-
-
-    // example data is dummy people to test hbs card generation. TODO: We need real data.
-    // db.Survey.findOne({
-    //   where: {UserId: req.user.id}
-    // }).then(function(survey){
-    //   return db.Survey.findAll({
-    //     where: {subtopic: survey.subtopic},
-    //     include:[{model: db.Users}]
-    //   })
-    // }).then(function (surveys){
-    //   matches = surveys.map(s => s.User.dataValues)
-    //   res.render("matchpage", /*your data here*/{matches: matches});
-    //   //res.json(surveys);
-    //   //console.log("step 2", surveys)
-    //   return
-    // })
   });
 
 
-  // favorites route, user clicks on favorites from nav bar and is taken to favorites page.  TODO: update findFavorites to use sequelize.Update examples:dbExamples to handlebars properties 
+  // favorites route, user clicks on favorites from nav bar and is taken to favorites page
   app.get("/user/buddylist", isAuthenticated, function (req, res) {
     db.Users.findAll({ where: { id: req.user.id } }).then(function (dbExample) {
       dbExample[0].getFriends().then(friends => {
@@ -79,14 +64,19 @@ module.exports = function (app) {
   });
 };
 
-function findMatches(userId, cb) {
+//////////////////////////////////
+/////////Matching Algorithm//////
+////////////////////////////////
 
+function findMatches(userId, cb) {
+  //looks at users most recent survey results
   db.Survey.findAll({
     limit: 1,
     where: { UserId: userId },
+    //this is what tells it to look in descending order (at the users most recent survey results)
     order: [['updatedAt', 'DESC']]
   }).then(function (surveys) {
-    //looks at users most recent survey results
+
     var userSurvey = surveys[0];
     var userStudytopic = userSurvey.studytopic;
     var userSubtopic = userSurvey.subtopic;
@@ -96,35 +86,35 @@ function findMatches(userId, cb) {
     var userRemote = userSurvey.meetvirtual;
     var userInPerson = userSurvey.meetIP;
 
-    // lets see if any of the users match our days
-
+    //this looks at all of the user surveys that have the same study topic except for the current user
     db.Survey.findAll({
       where: {
         studytopic: userStudytopic,
+        //this code ensures that the current user isn't taken into the matching alg-we don't want to match the user with themselves! 
         userId: { $not: userId }
       }
     }).then(function (surveys) {
-      //looks at users most recent survey results
 
       var matchedUsersInPerson = [];
       var matchedUsersRemote = [];
 
+      //this code determines the TOP BUDDIES based on Sub-Topic, Days, Times, Remote, In-Person
       surveys.forEach(survey => {
-
+        //this code looks to compare users sub-topic
         if (survey.subtopic != userSubtopic) {
           return;
         }
-
+        //this code looks to compare users day and time of day selections
         var days = survey.prefday.split(",").map(str => str.trim());
         var timeOfDay = survey.preftime;
         days.forEach(day => {
 
           if (userDays.includes(day) && userTime == timeOfDay) {
-            // this user matches
+            // alg looks for those who also selected remote
             if (userRemote && userRemote == survey.meetvirtual) {
               matchedUsersRemote.push(survey.UserId);
             }
-
+            //alg looks for those who also selected in person  
             if (userInPerson && userInPerson == survey.meetIP) {
               matchedUsersInPerson.push(survey.UserId);
             }
@@ -132,64 +122,51 @@ function findMatches(userId, cb) {
         });
       });
 
-      // TODO: Need to update code to return "close" matches if less than max
-      var matchedUsers = matchedUsersInPerson.concat(matchedUsersRemote);
-      if (matchedUsers.length < 6) {
-        surveys.forEach(survey => {
-          if (matchedUsers.includes(survey.UserId)) {
-            return;
-          }
+      //this combines the in person and remote users to compile the final matches list 
+      //slice shows the first 3 (top 3 matches) only if there are at least 3 matches
+      var bestMatches = matchedUsersInPerson.concat(matchedUsersRemote).slice(0, 3);
 
-          if (survey.subtopic != userSubtopic) {
+      //here we start looking for ADDITIONAL MATCHES
+      var additionalMatches = [];
+
+      //This code looks for up to 3 additional matches by Topic and Sub-Topic
+
+      surveys.forEach(survey => {
+        //skips over users who have already been added
+        if (bestMatches.includes(survey.UserId)) {
+          return;
+        }
+        //looks for user who selected the same Sub-Topic
+        if (survey.subtopic != userSubtopic) {
+          return;
+        }
+        //if additional matches were found, adds matches to the page
+        if (additionalMatches.length < 3) {
+          additionalMatches.push(survey.UserId);
+        }
+      });
+
+
+      //this code is used if there are still less than 3 matches for the additional matches by parent Topic.
+      if (additionalMatches.length < 3) {
+        surveys.forEach(survey => {
+          //skips over users who have already been added
+          if (bestMatches.includes(survey.UserId) ||
+            additionalMatches.includes(survey.UserId)) {
             return;
           }
-        
-          if (matchedUsers.length < 6) {
-            matchedUsers.push(survey.UserId);
+          //if additional matches were found, adds matches to the additional matches section
+          if (additionalMatches.length < 3) {
+            additionalMatches.push(survey.UserId);
           }
         });
       }
 
-      if (matchedUsers.length < 6) {
-        surveys.forEach(survey => {
-          if (matchedUsers.includes(survey.UserId)) {
-            return;
-          }
-  
-          if (matchedUsers.length < 6) {
-            matchedUsers.push(survey.UserId);
-          }
-        });
-        
-      }
+      //calls callback with matches (if any) so that matches page can print the matches to the TOP BUDDIES and ADDITIONAL MATCHES sections. 
 
-      cb(matchedUsers);
+      cb(bestMatches, additionalMatches);
     })
   });
 }
 
-    // example data is dummy people to test hbs card generation. TODO: We need real data.
-    // exampleData = {
-    //   matches: [
-    //     {
-    //       //example person 1
-    //       username: "Samsmith",
-    //       first_name: "Sam",
-    //       last_name: "Smith",
-    //       email: "sam@mail.com",
-    //       location: 98101,
-    //       id: 1,
-    //       photo: "https://slidesjs.com/examples/standard/img/example-slide-1.jpg"
-    //     },
-    //     {
-    //       // example person 4
-    //       username: "aprillep",
-    //       first_name: "Aprille",
-    //       last_name: "P",
-    //       email: "aprille@mail.com",
-    //       location: 98122,
-    //       id: 2,
-    //       photo: "https://slidesjs.com/examples/standard/img/example-slide-1.jpg"
-    //     }
-    //   ]
-    // }
+

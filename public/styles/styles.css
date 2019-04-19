@@ -1,5 +1,9 @@
+/* ---------------------------------------- */
+/* Global                                   */
+/* ---------------------------------------- */
+
 body {
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
   /* background: rgb(43,12,255);
   background: linear-gradient(345deg, rgba(43,12,255,1) 0%, rgba(0,255,234,1) 85%); */
 }
@@ -8,52 +12,115 @@ body {
   line-height: 2.5;
 }
 
-.container {
-  background-color: yellow;
+
+
+/* ---------------------------------------- */
+/* Navbar                                   */
+/* ---------------------------------------- */
+
+.cstmNavBar {
+  background-color: rgba(255, 255, 255, 0);
 }
 
-/* LANDING PAGE */
+.cstmNavLink {
+  color: orange;
+}
+
+
+
+/* ---------------------------------------- */
+/* Landing Page                             */
+/* ---------------------------------------- */
+
 .landingJumbo {
-  background-color: burlywood;
   /* background: rgb(43,12,255);
   background: linear-gradient(345deg, rgba(43,12,255,1) 0%, rgba(0,255,234,1) 85%); */
+  background-image: url("/img/landingbg.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
   height: 100vh;
   border-radius: unset;
-  padding-top: 200px;
+  padding-top: 175px;
+  margin-bottom: 0px;
 }
 
 .landingCTA {
-  margin-top: 100px;
+  margin-top: 75px;
   margin-bottom: 10px;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
-.signup-button {
+.landingButtons {
   margin-left: 20px;
   margin-right: 20px;
+  /* margin-top: 10px; */
+  margin-bottom: 10px;
   width: 250px;
-  color: white;
+  color: #6d3939;
   border-radius: 0px;
-  border-color: white;
+  border-color: #6d3939;
+}
+
+.landingButtons:hover {
+  color: white;
+  border-color: #6d3939;
+  background-color: #6d3939;
 }
 
 .loginMsg {
-  /* background-color: aqua; */
   display: flex;
   justify-content: center;
 }
 
 .aboutSection {
-  background-color: dodgerblue;
   height: 100vh;
 }
 
+.aboutHeader {
+  margin-top: 75px;
+}
 
-/* MATCH PAGE */
+.aboutBody {
+  margin-top: 50px;
+}
+
+
+
+/* ---------------------------------------- */
+/* Modals                                   */
+/* ---------------------------------------- */
+
+.modalButtons {
+  color: #6d3939;
+  border-radius: 0px;
+  border-color: #6d3939;
+  background-color: white;
+  width: 150px;
+}
+
+.modalButtons:hover {
+  color: white;
+  border-color: #6d3939;
+  background-color: #6d3939;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: center;
+}
+
+
+
+/* ---------------------------------------- */
+/* Match Page                               */
+/* ---------------------------------------- */
+
 .matchContainer {
-  background-color: darkorange;
-  margin-top: 20px;
+  /* background: rgb(200,230,245);
+  background: linear-gradient(345deg, rgba(200,230,245,1) 0%, rgba(92,160,211,1) 80%); */
+  /* margin-top: 20px; */
   margin-bottom: 20px;
   padding-top: 20px;
   padding-bottom: 20px;
@@ -67,24 +134,43 @@ body {
 }
 
 .matchCard {
-  margin: 10px;
+  margin: 20px;
+  border-radius: 0px;
+  border-style: solid;
+  border-color: #6d3939;
+}
+
+.card-img-top {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+.cardName {
+  color: #6d3939;
 }
 
 #favorite {
-  color: blue;
-  /* float: right; */
+  color: #6d3939;
   position: absolute;
   top: 15px;
   right: 15px;
-  /* font-size: 15px; */
 }
 
 
-/* BUDDYLIST PAGE */
+
+/* ---------------------------------------- */
+/* Favorites Page                           */
+/* ---------------------------------------- */
+
 .favesContainer {
-  background-color: indianred;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  /* background: rgb(200,230,245);
+  background: linear-gradient(345deg, rgba(200,230,245,1) 0%, rgba(92,160,211,1) 80%); */
+  /* margin-top: 20px; */
+  background: rgb(255,255,255);
+  background: linear-gradient(180deg, rgba(255,255,255,0.4640231092436975) 0%, rgba(248,249,250,1) 100%);
+  /* margin-bottom: 20px; */
   padding-top: 20px;
   padding-bottom: 20px;
+  height: 100vh;
+  overflow: auto;
 }
