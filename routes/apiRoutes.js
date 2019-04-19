@@ -52,11 +52,10 @@ module.exports = function (app) {
     // });
   });
 
-
   // user updates favorites
   app.put("/api/updateFavorite", function (req, res) {
-    db.Example.updateFavorite(res.user, res.favUserID, res.isFav).then(function (dbExamples) {
-      res.json(dbExamples);
+    db.favorites.update(res.user, res.userID, res.favoriteId).then(function (dbfavorites) {
+      res.json(dbfavorites);
     });
   });
 

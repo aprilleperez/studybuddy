@@ -61,7 +61,7 @@ function createAccount() {
   }).catch(handleLoginErr);
 };
 
-// function for creating the favorites for the puse and post
+// function for creating the favorites for the put and post
 function createfavorites() {
   ;
   var newuserId = $("#createuserId").val().trim(); // grab user input for userId
