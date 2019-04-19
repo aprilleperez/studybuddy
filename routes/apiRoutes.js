@@ -4,6 +4,8 @@ var db = require("../models");
 // Requiring our models and passport as we've configured it
 var passport = require("../config/passport");
 
+var isAuthenticated = require("../config/middleware/isAuthenticated");
+
 module.exports = function (app) {
   //  modal 1 user information on click is sent to DB Table 1: User Info (create account)
   // Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
@@ -23,8 +25,10 @@ module.exports = function (app) {
     });
   });
   // modal 2 user survey results on click are sent to Table 2: User Search in DB (new or additional) (survey).
-  app.post("/api/submitSurvey", function (req, res) {
+  app.post("/api/submitSurvey", isAuthenticated, function (req, res) {
     // res.json(req.body)
+    req.body.UserId = req.user.id;
+
     db.Survey.create(req.body).then(function () {
       res.sendStatus(200);
     }).catch(function (err) {
@@ -34,7 +38,7 @@ module.exports = function (app) {
   });
 
   // user updates a survey
-  app.put("/api/submitSurvey", function (req, res) {
+  app.put("/api/submitSurvey", isAuthenticated, function (req, res) {
     db.Survey.update(req.body).then(function () {
       res.json(dbSurvey);
     });
@@ -42,7 +46,7 @@ module.exports = function (app) {
 
 
   // user clicks to favorite a profile and this information is sent to Table 3: Favorites in DB (favorites).
-  app.post("/api/updateFavorite", function (req, res) {
+  app.post("/api/updateFavorite", isAuthenticated, function (req, res) {
     db.Users.findAll({ where: { id: req.user.id } }).then(userthing => {
       userthing[0].addFriend(req.body.id);
       res.json(userthing[0])
@@ -53,7 +57,7 @@ module.exports = function (app) {
   });
 
   // user updates favorites
-  app.put("/api/updateFavorite", function (req, res) {
+  app.put("/api/updateFavorite", isAuthenticated, function (req, res) {
     db.favorites.update(res.user, res.userID, res.favoriteId).then(function (dbfavorites) {
       res.json(dbfavorites);
     });
