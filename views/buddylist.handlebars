@@ -1,0 +1,73 @@
+<span id="top"></span>
+{{!-- NAVBAR --}}
+<nav class="navbar navbar-expand-lg navbar-light cstmNavBar">
+    <a class="navbar-brand" href="/">Study Buddy</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link cstmNavLink" id="about-link" href="/#about">About <span
+                        class="sr-only">(current)</span></a>
+            </li>
+            {{#unless authenticated}}
+            {{!-- ^^ not authenticated (falsey value) --}}
+            <li class="nav-item">
+                <a class="nav-link cstmNavLink" href="#login-modal" data-toggle="modal"
+                    data-target="#login-modal">Login</a>
+            </li>
+            {{/unless}}
+            {{#if authenticated}}
+            {{!-- if authenticated (true) --}}
+            <li class="nav-item">
+                <a class="nav-link cstmNavLink" href="/user/matches">Matches</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active cstmNavLink" href="/user/buddylist">Favorites</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link cstmNavLink" href="/logout">Logout</a>
+            </li>
+            {{/if}}
+        </ul>
+    </div>
+</nav>
+
+
+{{!-- TOP MATCHES SECTION --}}
+<div class="favesContainer">
+
+    <div class="text-center matchHeader brown">
+        <h1>Your saved buddies!</h1>
+    </div>
+
+    <div class="topMatches">
+        {{#each favorites}}
+        <div class="card matchCard textFade" style="width: 18rem;">
+            <img src="{{this.photo}}" class="card-img-top" alt="Match Photo">
+
+            <div class="card-body cardInfo">
+                <p class="card-text cardName"><strong>{{this.first_name}} {{this.last_name}}</strong></p>
+                <p class="card-text"><i class="fas fa-user brown"> : </i> {{this.username}}</p>
+                <p class="card-text email" data-content="Click to get in touch!" rel="popover" data-placement="top"
+                    data-trigger="hover"><a href="mailto:{{this.email}}"><i class="fas fa-envelope brown"> : </i>
+                        {{this.email}}</a></p>
+                <p class="card-text"><i class="fas fa-location-arrow brown"> : </i> {{this.location}}</p>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+
+</div>
+
+
+{{!-- Footer --}}
+<footer class="page-footer font-small cstmFooter">
+  <div class="footer-copyright text-center py-3">© 2019 Copyright:
+    <a href="https://github.com/aprilleperez/studybuddy">Study Buddy</a>
+  </div>
+</footer>
+
+<a href="#top" id="back-to-top" class="back-to-top" style="display: inline;">Top</a>
