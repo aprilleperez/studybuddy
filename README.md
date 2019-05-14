@@ -1,4 +1,4 @@
-# studybuddy
+# Study Buddy
 
 So much to learn, so little time. Sometimes studying is a little easier and more enjoyable with a buddy. Find your study buddy with the Study Buddy app.
 Study Buddy is an app created to help people interested in various study topics to connect with others interested in the same topics. Users can find those who want to study on the same terms as themselves, as well as can create a favorites page to keep track of their favorite study buddies. 
@@ -51,8 +51,8 @@ Our team did a great job planning this project and understanding what the MVP wa
 
 
 ## GitHub Link:
-https://github.com/aprilleperez/studybuddy
+[Repo](https://github.com/aprilleperez/studybuddy)
 
 ## Heroku Link: 
-https://your-study-buddy.herokuapp.com/
+[Study Buddy deployed](https://your-study-buddy.herokuapp.com/)
 
